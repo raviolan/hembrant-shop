@@ -18,47 +18,7 @@
         <div class="hero-content">
             <h2>Something special for your magical bestie</h2>
         </div>
-        <nav class="navbar">
-            <div class="navbar-logo">
-                <a href="/hembrant-shop.html">Bränt & Blandat</a>
-            </div>
-            <div class="navbar-menu" id="navbarMenu">
-                <ul>
-                    <li><a href="">Apparel</a></li>
-                    <li><a href="">Familiar</a></li>
-                    <li><a href="">Items & Artefacts</a></li>
-                    <li><a href="">Scrolls and Enchantments</a></li>
-                </ul>
-
-            </div>
-            <div class="navbar-hamburger" id="hamburgerIcon">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="cart">
-                <button class="cart-button">
-                    <img src="/shop-images/shoppingcart.webp" alt="Shopping Cart">
-                    <span class="cart-count">0</span> <!-- Dynamic item count -->
-                </button>
-            </div>
-            <div class="cart-drawer hidden">
-                <div class="cart-drawer-header">
-                    <h3>Your Cart</h3>
-                    <button class="close-drawer">✖</button>
-                </div>
-                <div class="cart-drawer-body">
-                    <p class="empty-message">Your cart is empty.</p>
-                    <!-- Dynamic cart items will be inserted here -->
-                    <ul class="cart-items"></ul>
-                </div>
-                <div class="cart-drawer-footer">
-                    <p class="total-price">Total: $0.00</p>
-                    <button class="checkout-button">Checkout</button>
-                </div>
-            </div>
-
-        </nav>
+        <div data-include="/components/header.html"></div>
     </header>
     <main data-category="familiar">
         <section class="category-section">
