@@ -14,3 +14,16 @@ body {
     font-family: 'quicksand', sans-serif;
     src: url(/fonts/quicksand/Quicksand_Light.otf);
 }
+
+/* Shared header styles */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+}

@@ -1,8 +1,8 @@
 .cart {
-    position: absolute;
+    position: sticky;
     top: 15px;
     right: 15px;
-    z-index: 100;
+    z-index: 1000;
     margin-left: auto;
     /* Ensures the cart is far-right */
 }
