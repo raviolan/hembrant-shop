@@ -77,4 +77,8 @@
     .hero p {
         font-size: 1.2rem;
     }
+
+    .category-hero {
+        height: 50vh;
+    }
 }
