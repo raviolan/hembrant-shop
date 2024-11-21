@@ -1,0 +1,74 @@
+/* Parent Section Styles */
+.category-section {
+    padding: 20px;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Grid Layout */
+.category-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+}
+
+@media (min-width: 1025px) {
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .category-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* Product Item Styles */
+.product-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    padding-bottom: 5px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 0;
+}
+
+.product-item .hover-product-img {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    padding-bottom: 5px;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.product-item:hover .hover-product-img {
+    display: block;
+}

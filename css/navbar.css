@@ -1,0 +1,125 @@
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: white;
+    color: black;
+}
+
+.navbar-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navbar-menu.active {
+    display: flex;
+}
+
+.navbar-menu ul {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-logo a {
+    font-size: 1.8rem;
+    color: black;
+    text-decoration: none;
+}
+
+
+.navbar-menu a {
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.navbar-hamburger {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: space-around;
+    height: 30px;
+}
+
+.navbar-hamburger .bar {
+    width: 30px;
+    height: 4px;
+    background-color: black;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: nowrap;
+        padding: 10px;
+    }
+
+    .navbar-logo {
+        flex: 1;
+    }
+
+    .navbar-hamburger {
+        flex: 0;
+        display: flex;
+        margin-right: 10px;
+    }
+
+    .navbar-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        display: none;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 769px) {
+    .navbar-menu {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        gap: 20px;
+        box-shadow: none;
+        padding-right: 35px;
+        background: none;
+    }
+
+    .navbar-menu ul {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .navbar-hamburger {
+        display: none;
+        /* Hide the hamburger menu */
+    }
+}

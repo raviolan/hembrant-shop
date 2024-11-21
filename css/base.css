@@ -1,0 +1,16 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'quicksand';
+    src: url(/fonts/quicksand/Quicksand_Light.otf);
+}
+
+body {
+    font-family: 'quicksand', sans-serif;
+    src: url(/fonts/quicksand/Quicksand_Light.otf);
+}

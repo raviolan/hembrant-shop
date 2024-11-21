@@ -1,0 +1,72 @@
+/* New In Section */
+.new-in {
+    padding: 20px;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.new-in-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.new-in-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+}
+
+.new-in-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.new-in-item img {
+    width: 100%;
+    height: auto;
+    padding-bottom: 5px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 0;
+}
+
+.new-in-item .hover-product-img {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    padding-bottom: 5px;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.new-in-item:hover .hover-product-img {
+    display: block;
+}
+
+@media (min-width: 1025px) {
+    .new-in-title {
+        font-size: 2.5rem;
+    }
+
+    .new-in-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+}

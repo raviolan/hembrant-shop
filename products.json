@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Buddy Goggles",
+        "category": "familiar",
+        "price": 20,
+        "mainImage": "/shop-images/raven-goggels.png",
+        "hoverImage": "/shop-images/raven-googles-product.png",
+        "dateAdded": "2024-10-30"
+    },
+    {
+        "id": 2,
+        "name": "Sidekick Jacket",
+        "category": "familiar",
+        "price": 30,
+        "mainImage": "/shop-images/yellow-bat-jacket.png",
+        "hoverImage": "/shop-images/yellow-bat-jacket-product.png",
+        "dateAdded": "2024-11-01"
+    },
+    {
+        "id": 3,
+        "name": "Endless Satchel",
+        "category": "apparel",
+        "price": 650,
+        "mainImage": "/shop-images/bag-of-holding.jpg",
+        "hoverImage": "/shop-images/bag-of-holding-gold.jpg",
+        "dateAdded": "2024-11-05"
+    },
+    {
+        "id": 4,
+        "name": "Gold Trinket",
+        "category": "familiar",
+        "price": 100,
+        "mainImage": "/shop-images/gold-froggy.png",
+        "hoverImage": "/shop-images/froggy-necklace.png",
+        "dateAdded": "2024-10-25"
+    }
+]
