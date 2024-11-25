@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="cart-item-price">GP ${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
             `).join("");
-            attachCartListeners();
+            attachCartListeners(); // Attach event listeners after rendering items
         } else {
             cartItemsContainer.innerHTML = "<p>Your cart is empty!</p>";
         }
@@ -48,15 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".remove-item").forEach(button => {
             button.addEventListener("click", (e) => {
                 const productId = e.target.getAttribute("data-id");
+                console.log(`Remove button clicked for product ID: ${productId}`);
                 updateItemQuantity(productId, 0); // Remove item by setting quantity to 0
             });
         });
     }
 
-
     // Update item quantity or remove item
     function updateItemQuantity(productId, newQuantity) {
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
         const productIndex = cart.findIndex(item => item.id == productId); // Use `==` for type flexibility
 
         if (productIndex !== -1) {
@@ -65,13 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 cart.splice(productIndex, 1); // Remove item if quantity is 0
             }
-            localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart to storage
+            saveCart(cart); // Save updated cart to storage
         }
 
         renderCartItems(); // Refresh UI after updating the cart
         calculateTotals(); // Recalculate totals
     }
-
 
     // Calculate totals
     function calculateTotals() {
@@ -80,12 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
         totalElement.textContent = `GP ${subtotal.toFixed(2)}`;
     }
 
+    // Initialize the page
     renderCartItems();
     calculateTotals();
 });
 
-
 // Apply discount (placeholder)
+const discountInput = document.getElementById("apply-discount");
 discountInput.addEventListener("click", () => {
     alert("Discounts coming soon!"); // Add real logic here
 });
@@ -98,7 +97,3 @@ form.addEventListener("submit", (e) => {
     localStorage.removeItem("cart"); // Clear the cart
     window.location.href = "/"; // Redirect to the home page
 });
-
-renderCartItems();
-calculateTotals();
-console.log(`Remove button clicked for product ID: ${productId}`);
