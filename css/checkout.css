@@ -1,0 +1,250 @@
+header {
+    padding-top: 40px;
+}
+
+.header-link {
+    color: black;
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+label {
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.checkout-h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.checkout-container {
+    display: flex;
+    gap: 40px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 49%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.checkout-form button,
+.checkout-summary button {
+    margin-top: 20px;
+    align-self: center;
+    transition: all 0.3s ease;
+    border: 2px solid purple;
+    background-color: transparent;
+    color: purple;
+    font-family: 'quicksand', sans-serif;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+
+
+}
+
+.checkout-form button:hover,
+.checkout-summary button:hover {
+    background-color: purple;
+    color: white;
+    border: none;
+}
+
+.checkout-form input,
+.checkout-form select {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    /* Match font size for consistency */
+}
+
+/* Checkout Summary Styling */
+.checkout-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 49%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cart Items */
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual Cart Item */
+.cart-item {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+/* Cart Item Image */
+.cart-item-image {
+    grid-row: span 2;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    align-self: start;
+}
+
+/* Cart Item Content (Name + Controls) */
+.cart-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Product Name */
+.cart-item-name {
+    grid-column: 2 / 3;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Cart Item Controls (Quantity + Remove Button) */
+.cart-item-controls {
+    display: flex;
+    grid-column: 2 / 3;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cart-item-quantity {
+    height: 30px;
+    width: 20%;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Remove Button */
+.remove-item {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    background-color: transparent;
+    border: 1px solid purple;
+    color: purple;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.remove-item:hover {
+    background-color: purple;
+    color: white;
+}
+
+/* Cart Item Price */
+.cart-item-price {
+    grid-column: 3 / 4;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+}
+
+/* Discount Code Section */
+.discount-code-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.discount-code-container input {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.discount-code-container button {
+    height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
+    color: purple;
+    border: 1px solid purple;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.discount-code-container button:hover {
+    background-color: purple;
+    color: white;
+}
+
+/* Order Total Section */
+.order-total {
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/* Mobile View: Stack the checkout summary and form */
+@media (max-width: 768px) {
+    .checkout-container {
+        flex-direction: column-reverse;
+        /* Stack the boxes vertically */
+        gap: 20px;
+        /* Add space between stacked boxes */
+    }
+
+    .checkout-summary,
+    .checkout-form {
+        width: 100%;
+        /* Make the boxes take up full width */
+    }
+}
