@@ -72,3 +72,28 @@
 .product-item:hover .hover-product-img {
     display: block;
 }
+
+.category-grid button {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    background-color: transparent;
+    font-family: quicksand, 'sans-serif';
+    padding-inline: 10px;
+    border: 1px solid purple;
+    color: purple;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-grid p {
+    font-size: smaller;
+    padding: 7px;
+}
+
+.category-grid button:hover {
+    background-color: purple;
+    color: white;
+}
