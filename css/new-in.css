@@ -5,6 +5,31 @@
     text-align: center;
 }
 
+.new-in button {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    background-color: transparent;
+    font-family: quicksand, 'sans-serif';
+    padding-inline: 10px;
+    border: 1px solid purple;
+    color: purple;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-in p {
+    font-size: smaller;
+    padding: 7px;
+}
+
+button:hover {
+    background-color: purple;
+    color: white;
+}
+
 .new-in-title {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
@@ -57,6 +82,7 @@
 
 .new-in-item:hover .hover-product-img {
     display: block;
+
 }
 
 @media (min-width: 1025px) {
