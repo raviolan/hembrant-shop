@@ -1,0 +1,67 @@
+body {
+
+    line-height: 1.6;
+    margin: 0;
+    padding: 10%;
+    background-color: #f8f8f8;
+}
+
+header {
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+header a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.shop-button {
+    background-color: none;
+    border: purple 1px solid;
+    color: purple;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.shop-button:hover {
+    background-color: purple;
+    color: white;
+}
+
+main {
+    max-height: 30%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-page {
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+
+}
+
+.confirmation-div {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.confirmation-div h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.confirmation-div p {
+    color: #555;
+    font-size: 1rem;
+}

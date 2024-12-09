@@ -5,23 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <link rel="stylesheet" href="/css/checkout.css">
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="css/confirmation.css">
 
 </head>
 
 <body>
     <header>
         <a class="header-link" href="hembrant-shop.html">
-            <h1 class="checkout-h1">Shop Curio</h1>
+            <h1 class="confirmation-h1">Shop Curio</h1>
         </a>
     </header>
-    <h1>Thank you for your order!</h1>
-    <p>Your order has been placed successfully. Please screenshot this confirmation to show on delivery.</p>
+    <main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js"></script>
-    <script src="/js/confirmation.js" defer></script>
+        <div class="confirmation-page">
+            <div class="confirmation-div">
+                <h1>Thank you for your order!</h1>
+                <p>Your order has been placed successfully. <br>Please screenshot this confirmation to show on delivery.
+                </p>
+                <br>
+                <a href="hembrant-shop.html" class="shop-button">Back to Curio</a>
+                <a href="https://hembrant.netlify.app/dms-den/dms-lighthouse" class="shop-button">DMs den</a>
+            </div>
+        </div>
 
+        <div id="confirmation-container">
+            <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js"></script>
+            <script src="/js/confirmation.js" defer></script>
+        </div>
+
+    </main>
 
 </body>
 

@@ -32,17 +32,37 @@ emailjs.send('service_l4vz69y', 'template_qg3r1mq', orderDetails)
         console.error('Failed to send email:', error);
     });
 
-// Clear the cart
-localStorage.removeItem("cart");
+
 
 // Optionally display order details on the confirmation page
 document.body.innerHTML += `
-    <h2>Order Details</h2>
+ <section class="cart-details">
+        <h2>Items Ordered</h2>
+        <div class="cart-grid">
+            ${cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.mainImage}" alt="${item.name}" class="cart-item-image">
+                    <div>
+                        <p><strong>${item.name}</strong></p>
+                        <p>Quantity: ${item.quantity}</p>
+                        <p>Price: GP ${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    </section>
+  <section class="order-details">    
+<h2>Order Details</h2>
     <p><strong>Hero's Name:</strong> ${orderDetails.name}</p>
     <p><strong>Party:</strong> ${orderDetails.party}</p>
     <p><strong>Location:</strong> ${orderDetails.address}</p>
     <p><strong>Delivery Method:</strong> ${orderDetails['delivery-method']}</p>
     <p><strong>Delivery Notes:</strong> ${orderDetails['delivery-notes']}</p>
     <p><strong>Gold Pouch Verified:</strong> ${orderDetails['gold-pouch-verification']}</p>
+     </section>
+     
 `;
 
+
+// Clear the cart
+localStorage.removeItem("cart");
