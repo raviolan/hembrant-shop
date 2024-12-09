@@ -89,11 +89,3 @@ discountInput.addEventListener("click", () => {
     alert("Discounts coming soon!"); // Add real logic here
 });
 
-// Handle form submission
-const form = document.getElementById("checkout-form");
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Order placed! Thank you for shopping.");
-    localStorage.removeItem("cart"); // Clear the cart
-    window.location.href = "/"; // Redirect to the home page
-});

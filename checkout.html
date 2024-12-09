@@ -13,7 +13,7 @@
 <body>
     <header>
         <a class="header-link" href="hembrant-shop.html">
-            <h1 class="checkout-h1">Bränt & Blandat</h1>
+            <h1 class="checkout-h1">Shop Curio</h1>
         </a>
     </header>
 
@@ -21,22 +21,39 @@
         <!-- Left Side: Form -->
         <div class="checkout-form">
             <h2>Contact</h2>
-            <form id="checkout-form">
-                <label>Email</label>
-                <input type="email" placeholder="Enter your email" required>
+            <form id="checkout-form" action="confirmation.html" method="GET">
+                <label>Hero's Name</label>
+                <input type="text" name="name" placeholder="Sir Thundercleft the Mighty, or just Bob?" required>
+                <label>Party Affiliation</label>
+                <input type="text" name="party" placeholder="Orc-Smashers Anonymous" required>
                 <h2>Delivery</h2>
-                <label>Country/Region</label>
 
-                <select>
-                    <option value="sweden">Sweden</option>
-                    <option value="other">Other</option>
+                <label>Current Lair/Location</label>
+                <input type="text" name="address" placeholder="The Cursed Forest Clearing? Your mom's basement?"
+                    required>
+                <label>Preferred delivery metod</label>
+                <label for="delivery-method">Preferred Delivery Method:</label>
+                <select id="delivery-method" name="delivery-method" required>
+                    <option value="ship-to-camp">Ship to Current Campfire</option>
+                    <option value="dm-hand-delivery">DM Hand Delivery (next tavern or safe zone)</option>
+                    <option value="familiar-pickup">I will summon my Familiar for Pickup</option>
                 </select>
-                <label>Address</label>
-                <input type="text" placeholder="Address" required>
-                <label>City</label>
-                <input type="text" placeholder="City" required>
-                <label>Postal Code</label>
-                <input type="text" placeholder="Postal Code" required>
+                <br><br>
+
+                <label for="delivery-notes">Additional Delivery Instructions:</label>
+                <br><br>
+                <p>If you need us to be discreet about this delivery, this is your chance to let us know.</p> <br><br>
+                <textarea id="delivery-notes" name="delivery-notes" rows="4" cols="50"
+                    placeholder="Leave instructions for delivery goblins..."></textarea>
+                <br><br>
+
+                <!-- Treasury Information -->
+                <label for="gold-pouch-verification">
+                    <input type="checkbox" id="gold-pouch-verification" name="gold-pouch-verification" required>
+                    I confirm my gold pouch isn’t cursed or full of fake coins.
+                </label>
+                <br><br>
+
                 <button type="submit">Place Order</button>
             </form>
         </div>
@@ -61,6 +78,8 @@
 
 
     <script src="/js/checkout.js" defer></script>
+    <script src="/js/confirmation.js"></script>
+
 </body>
 
 </html>

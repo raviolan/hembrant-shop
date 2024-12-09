@@ -4,6 +4,7 @@
         "name": "Buddy Goggles",
         "category": "familiar",
         "price": 20,
+        "description": "glasögon för din familiar!!!!",
         "mainImage": "/shop-images/raven-goggels.png",
         "hoverImage": "/shop-images/raven-googles-product.png",
         "dateAdded": "2024-10-30"
@@ -13,6 +14,7 @@
         "name": "Sidekick Jacket",
         "category": "familiar",
         "price": 30,
+        "description": "kallt nere i grottorna? frukta icke. Denna lilla jacka passar på alla slags familiars.",
         "mainImage": "/shop-images/yellow-bat-jacket.png",
         "hoverImage": "/shop-images/yellow-bat-jacket-product.png",
         "dateAdded": "2024-11-01"
@@ -22,6 +24,7 @@
         "name": "Endless Satchel",
         "category": "apparel",
         "price": 650,
+        "description": "En helt normal bag of holding, fast mkt mkt glittrigare",
         "mainImage": "/shop-images/bag-of-holding.jpg",
         "hoverImage": "/shop-images/bag-of-holding-gold.png",
         "dateAdded": "2024-11-05"
@@ -31,6 +34,7 @@
         "name": "Gold Trinket",
         "category": "familiar",
         "price": 100,
+        "description": "such a cute trinket. no effect.",
         "mainImage": "/shop-images/gold-froggy.png",
         "hoverImage": "/shop-images/froggy-necklace.png",
         "dateAdded": "2024-10-25"
@@ -40,7 +44,8 @@
         "name": "Scroll of this n that",
         "category": "scrolls",
         "price": 100,
-        "mainImage": "/shop-images/placeholder-hero.png",
+        "description": "scroll of magic happenings",
+        "mainImage": "/shop-images/basic-scroll.png",
         "hoverImage": "/shop-images/froggy-necklace.png",
         "dateAdded": "2024-9-25"
     },
@@ -49,8 +54,19 @@
         "name": "item thingy",
         "category": "item",
         "price": 100,
+        "description": "it's an item thingy wingy",
         "mainImage": "/shop-images/placeholder-hero.png",
         "hoverImage": "/shop-images/froggy-necklace.png",
         "dateAdded": "2024-9-25"
+    },
+    {
+        "id": 7,
+        "name": "Gubben i Lådan",
+        "category": "item",
+        "price": 1000,
+        "description": "huvud, axlar knä och tå – gubben i lådan har fyra attacker och gör förvånansvärt lite skada. Är det värt det? Det är upp till dig",
+        "mainImage": "/shop-images/placeholder-hero.png",
+        "hoverImage": "/shop-images/froggy-necklace.png",
+        "dateAdded": "2024-12-04"
     }
 ]
