@@ -13,6 +13,13 @@ const orderDetails = {
     'gold-pouch-verification': params.get('gold-pouch-verification') ? 'Yes' : 'No', // Gold Pouch Verification
 };
 
+// Retrieve cart items from localStorage
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const cartDetails = cart.map(item => `${item.name} (x${item.quantity}) - GP ${(item.price * item.quantity).toFixed(2)}`).join('\n');
+
+// Add cart details to the email payload
+orderDetails.cart = cartDetails;
+
 // Debugging: Log the order details to ensure correctness
 console.log('Order Details:', orderDetails);
 
