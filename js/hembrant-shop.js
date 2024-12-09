@@ -14,21 +14,28 @@ function createProductElement(product) {
     return productDiv;
 }
 
-// Function to load "New In" products
-function loadNewInItems() {
-    fetch('/products.json')
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/products.json")
         .then(response => response.json())
         .then(products => {
-            const newInGrid = document.querySelector('.new-in-grid');
-            const newInItems = products.slice(0, 4); // Pull the first 4 products
-            newInGrid.innerHTML = '';
-            newInItems.forEach(product => {
-                const productElement = createProductElement(product);
-                newInGrid.appendChild(productElement);
-            });
+            const newInSection = document.querySelector(".new-in-grid");
+
+            newInSection.innerHTML = products
+                .slice(0, 4) // Display the first 4 products
+                .map(product => `
+                    <div class="product-card">
+                        <a href="/products.html?id=${product.id}">
+                            <img src="${product.mainImage}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p>GP ${product.price}</p>
+                        </a>
+                    </div>
+                `)
+                .join("");
         })
-        .catch(error => console.error('Error loading New In items:', error));
-}
+        .catch(error => console.error("Failed to load new in products:", error));
+});
+
 
 // Initialize the homepage
 document.addEventListener('DOMContentLoaded', loadNewInItems);
