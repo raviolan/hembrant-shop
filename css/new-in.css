@@ -62,7 +62,12 @@ button:hover {
 .new-in-grid .product-card img {
     width: 100%;
     height: auto;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.2s ease;
+}
+
+.new-in-grid .product-card:hover img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.03);
 }
 
 .new-in-grid .product-card h3 {
@@ -80,9 +85,13 @@ button:hover {
 .product-card img {
     width: 100%;
     height: auto;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.2s ease;
 }
 
+.product-card:hover img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.03);
+}
 
 @media (min-width: 1025px) {
     .new-in-title {
