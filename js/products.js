@@ -3,13 +3,13 @@ const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
 if (productId) {
-    // Fetch the product details
     fetch('/products.json')
         .then(response => response.json())
         .then(products => {
             const product = products.find(p => p.id == productId);
             if (product) {
                 renderProductDetails(product);
+                renderRelatedProducts(products, product.category, productId);
             } else {
                 document.getElementById('product-details').innerHTML = '<p>Product not found!</p>';
             }
@@ -25,26 +25,65 @@ if (productId) {
 // Function to render product details
 function renderProductDetails(product) {
     const productDetails = document.getElementById('product-details');
+
+    // Collect all images: main, hover, and extra images dynamically
+    const galleryImages = [product.mainImage, product.hoverImage]
+        .concat(
+            Object.keys(product)
+                .filter(key => key.startsWith('extraImage')) // Find keys like extraImage1, extraImage2
+                .map(key => product[key])
+        )
+        .filter(Boolean); // Filter out undefined or null values
+
+    const thumbnails = galleryImages.map((image, index) => `
+        <img 
+            src="${image}" 
+            class="product-thumbnail ${index === 0 ? 'active' : ''}" 
+            onclick="updateMainImage('${image}', this)">
+    `).join('');
+
     productDetails.innerHTML = `
+        <div class="product-image-gallery">
+            <img 
+                src="${product.mainImage}" 
+                alt="${product.name}" 
+                id="main-product-image" 
+                class="product-main-image">
+            <div class="product-thumbnails">
+                ${thumbnails}
+            </div>
+        </div>
         <div class="product-detail-container">
-            <img src="${product.mainImage}" alt="${product.name}" class="product-main-image">
             <h1>${product.name}</h1>
-            <p><strong>Category:</strong> ${capitalizeFirstLetter(product.category)}</p>
             <p>${product.description}</p>
-            <p>GP ${product.price.toFixed(2)}</p>
-            <p><strong>Date Added:</strong> ${formatDate(product.dateAdded)}</p>
+            <p><strong>Price:</strong> GP ${product.price.toFixed(2)}</p>
             <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
         </div>
     `;
 }
 
-// Utility function to capitalize the first letter of a string
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+// Function to update main image
+function updateMainImage(imageUrl, thumbnailElement) {
+    const mainImage = document.getElementById('main-product-image');
+    mainImage.src = imageUrl;
+
+    // Highlight the active thumbnail
+    document.querySelectorAll('.product-thumbnail').forEach(thumbnail => {
+        thumbnail.classList.remove('active');
+    });
+    thumbnailElement.classList.add('active');
 }
 
-// Utility function to format date strings
-function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+// Function to render related products
+function renderRelatedProducts(products, category, productId) {
+    const relatedProducts = products.filter(p => p.category === category && p.id != productId).slice(0, 4);
+    const grid = document.querySelector('.related-products-grid');
+    grid.innerHTML = relatedProducts.map(product => `
+        <div class="related-product-card">
+            <a href="/products.html?id=${product.id}">
+                <img src="${product.mainImage}" alt="${product.name}">
+                <h3>${product.name}</h3>
+            </a>
+        </div>
+    `).join('');
 }

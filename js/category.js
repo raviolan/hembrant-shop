@@ -11,9 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 .map(product => `
                     <div class="product-card">
                         <a href="/products.html?id=${product.id}">
-                            <img src="${product.mainImage}" alt="${product.name}">
+                            <img 
+                                src="${product.mainImage}" 
+                                alt="${product.name}" 
+                                onmouseover="this.src='${product.hoverImage}'" 
+                                onmouseout="this.src='${product.mainImage}'">
                             <h3>${product.name}</h3>
-                            <p>GP ${product.price}</p>
+                            <p>GP ${product.price.toFixed(2)}</p>
                         </a>
                     </div>
                 `)
@@ -21,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error("Failed to load products:", error));
 });
-
 
 // Initialize the category page
 document.addEventListener('DOMContentLoaded', () => {

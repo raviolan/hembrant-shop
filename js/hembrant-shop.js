@@ -4,12 +4,16 @@ function createProductElement(product) {
     productDiv.classList.add('new-in-item');
     productDiv.innerHTML = `
         <div class="product-image-wrapper">
-            <img class="main-product-img" src="${product.mainImage}" alt="${product.name}">
-            <img class="hover-product-img" src="${product.hoverImage}" alt="${product.name}">
+            <img 
+                class="main-product-img" 
+                src="${product.mainImage}" 
+                alt="${product.name}" 
+                onmouseover="this.src='${product.hoverImage}'" 
+                onmouseout="this.src='${product.mainImage}'">
+            <h3>${product.name}</h3>
+            <p>GP ${product.price.toFixed(2)}</p>
+            <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
         </div>
-        <h3>${product.name}</h3>
-        <p>GP ${product.price.toFixed(2)}</p>
-        <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
     `;
     return productDiv;
 }
@@ -25,7 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 .map(product => `
                     <div class="product-card">
                         <a href="/products.html?id=${product.id}">
-                            <img src="${product.mainImage}" alt="${product.name}">
+                            <img 
+                                src="${product.mainImage}" 
+                                alt="${product.name}" 
+                                onmouseover="this.src='${product.hoverImage}'" 
+                                onmouseout="this.src='${product.mainImage}'">
                             <h3>${product.name}</h3>
                             <p>GP ${product.price}</p>
                         </a>
@@ -35,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error("Failed to load new in products:", error));
 });
-
 
 // Initialize the homepage
 document.addEventListener('DOMContentLoaded', loadNewInItems);
