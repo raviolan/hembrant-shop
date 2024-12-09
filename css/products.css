@@ -1,4 +1,6 @@
 /* Product Details Container */
+
+
 .product-details-container {
     display: flex;
     flex-wrap: wrap;
@@ -55,6 +57,7 @@
     font-size: 2rem;
     color: #333;
     margin-bottom: 10px;
+
 }
 
 .product-detail-container p {
