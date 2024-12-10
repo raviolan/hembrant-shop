@@ -159,4 +159,8 @@ body {
     .product-detail-container button {
         align-self: center;
     }
+
+    .product-card button {
+        justify-self: center;
+    }
 }
