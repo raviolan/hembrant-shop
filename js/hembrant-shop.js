@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Render product cards dynamically
             newInSection.innerHTML = products
-                .slice(0, 4) // Display the first 4 products
+                .slice(12, 17) // Display the first 4 products
                 .map(product => `
                     <div class="product-card">
                         <a href="/products.html?id=${product.id}">
