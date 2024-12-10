@@ -65,3 +65,22 @@ main {
     color: #555;
     font-size: 1rem;
 }
+
+.cart-item {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+}
+
+.cart-item-image {
+    width: 5rem;
+    padding-right: 10px;
+}
+
+.cart-item-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    /* Optional: Add some styling */
+}
