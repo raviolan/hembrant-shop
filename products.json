@@ -35,7 +35,7 @@
         "name": "Gold Trinket",
         "category": "familiar",
         "price": 100,
-        "description": "such a cute trinket. no effect.",
+        "description": "such a cute trinket. no effect just vibes.",
         "mainImage": "/shop-images/gold-froggy.png",
         "hoverImage": "/shop-images/froggy-necklace.png",
         "dateAdded": "2024-10-25"
@@ -105,7 +105,7 @@
         "name": "Flameweaver Gloves",
         "category": "apparel",
         "price": 150,
-        "description": "Thin, enchanted gloves that leave fiery trails when waved. Perfect for dramatic spellcasting.",
+        "description": "Tunna, eleganta, otroligt delikata små handsmycken. Eller a typ handske fast ändå inte. I alla fall så gör dessa små dramatiska eldspår i luften när du rör händerna. Det blir sååå fin dramatisk effekt när man gör trollkonster eller bara viftar medans man pratar.",
         "mainImage": "/shop-images/flameweaver.png",
         "hoverImage": "/shop-images/flameweaver-2.png",
         "dateAdded": "2024-12-10"
@@ -125,7 +125,7 @@
         "name": "Gloves of Goblin Tossing",
         "category": "apparel",
         "price": 90,
-        "description": "Magical gloves that grant advantage when throwing small creatures. Great for bar fights.",
+        "description": "Magiska handskar som ger dig advantage på kast med små varelser. Perfekta för slagsmål på krogen.",
         "mainImage": "/shop-images/goblin-tossers.png",
         "hoverImage": "/shop-images/gobtoss.webp",
         "dateAdded": "2024-12-10"
@@ -145,7 +145,7 @@
         "name": "Mantle of the Unyielding",
         "category": "apparel",
         "price": 250,
-        "description": "A reversible cape that subtly ripples as though caught in a breeze, no matter the conditions. Boosts Charisma checks in formal settings.",
+        "description": "En vändbar mantel som liksom alltid fladdrar lite dramatiskt – oavsett väder. Ger dig även en liten boost på Charisma-checks i vissa formella sammanhang.",
         "mainImage": "/shop-images/mantle-1.png",
         "hoverImage": "/shop-images/mantle-2.png",
         "extraImage1": "/shop-images/mantle-3.png",

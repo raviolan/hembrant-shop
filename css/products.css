@@ -92,7 +92,10 @@ body {
 /* Related Products Section */
 .related-products {
     margin-top: 40px;
-    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
 }
 
 .related-products h2 {
@@ -111,6 +114,7 @@ body {
 
 .related-product-card {
     text-align: center;
+    justify-content: space-evenly;
     background-color: #f5f5f5;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
