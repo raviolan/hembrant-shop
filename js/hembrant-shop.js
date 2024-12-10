@@ -23,36 +23,37 @@ document.addEventListener("DOMContentLoaded", () => {
             const newInSection = document.querySelector(".new-in-grid");
 
             // Render product cards dynamically
-            newInSection.innerHTML = products
-                .slice(12, 17) // Display the first 4 products
+            const selectedProducts = products.slice(12, 17); // Display the selected products
+            newInSection.innerHTML = selectedProducts
                 .map(product => `
-                    <div class="product-card">
-                        <a href="/products.html?id=${product.id}">
-                            <img 
-                                class="main-product-img" 
-                                src="${product.mainImage}" 
-                                alt="${product.name}">
-                            <h3>${product.name}</h3>
-                            <p>GP ${product.price.toFixed(2)}</p>
-                        </a>
-                        <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
-                    </div>
-                `)
+                     <div class="product-card">
+                         <a href="/products.html?id=${product.id}">
+                             <img 
+                                 class="main-product-img" 
+                                 src="${product.mainImage}" 
+                                 alt="${product.name}" 
+                                 data-hover="${product.hoverImage}" 
+                                 data-main="${product.mainImage}">
+                             <h3>${product.name}</h3>
+                             <p>GP ${product.price.toFixed(2)}</p>
+                         </a>
+                         <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+                     </div>
+                 `)
                 .join("");
 
             // Attach hover functionality dynamically
-            document.querySelectorAll(".product-card img").forEach((img, index) => {
-                const product = products[index];
-                if (product) {
-                    img.addEventListener("mouseover", () => {
-                        if (product.hoverImage) {
-                            img.src = product.hoverImage;
-                        }
-                    });
-                    img.addEventListener("mouseout", () => {
-                        img.src = product.mainImage;
-                    });
-                }
+            document.querySelectorAll(".product-card img").forEach(img => {
+                img.addEventListener("mouseover", () => {
+                    const hoverImage = img.getAttribute("data-hover");
+                    if (hoverImage) {
+                        img.src = hoverImage;
+                    }
+                });
+                img.addEventListener("mouseout", () => {
+                    const mainImage = img.getAttribute("data-main");
+                    img.src = mainImage;
+                });
             });
         })
         .catch(error => console.error("Failed to load new in products:", error));
