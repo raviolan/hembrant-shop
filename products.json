@@ -17,7 +17,7 @@
         "description": "kallt nere i grottorna? frukta icke. Denna lilla jacka passar på alla slags familiars.",
         "mainImage": "/shop-images/yellow-bat-jacket.png",
         "hoverImage": "/shop-images/yellow-bat-jacket-product.png",
-        "extraImage1": "/shop-images/placeholder-hero.png",
+        "extraImage1": "",
         "dateAdded": "2024-11-01"
     },
     {
@@ -66,8 +66,8 @@
         "category": "item",
         "price": 1000,
         "description": "huvud, axlar knä och tå – gubben i lådan har fyra attacker och gör förvånansvärt lite skada. Är det värt det? Det är upp till dig",
-        "mainImage": "/shop-images/placeholder-hero.png",
-        "hoverImage": "/shop-images/froggy-necklace.png",
+        "mainImage": "/shop-images/gold-froggy.png",
+        "hoverImage": "/shop-images/yellow-bat-jacket-product.png",
         "dateAdded": "2024-12-04"
     }
 ]

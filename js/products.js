@@ -39,6 +39,7 @@ function renderProductDetails(product) {
         <img 
             src="${image}" 
             class="product-thumbnail ${index === 0 ? 'active' : ''}" 
+            data-image="${image}" 
             onclick="updateMainImage('${image}', this)">
     `).join('');
 
@@ -60,6 +61,22 @@ function renderProductDetails(product) {
             <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
         </div>
     `;
+
+    // Attach hover functionality to all thumbnails
+    const mainImage = document.getElementById('main-product-image');
+    document.querySelectorAll('.product-thumbnail').forEach(thumbnail => {
+        thumbnail.addEventListener('mouseover', () => {
+            const hoverImage = thumbnail.getAttribute('data-image');
+            mainImage.src = hoverImage;
+        });
+        thumbnail.addEventListener('mouseout', () => {
+            // Restore the active thumbnail's image
+            const activeThumbnail = document.querySelector('.product-thumbnail.active');
+            if (activeThumbnail) {
+                mainImage.src = activeThumbnail.getAttribute('data-image');
+            }
+        });
+    });
 }
 
 // Function to update main image
