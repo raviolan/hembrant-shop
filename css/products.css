@@ -1,5 +1,8 @@
 /* Product Details Container */
 
+body {
+    padding-top: 70px;
+}
 
 .product-details-container {
     display: flex;
@@ -58,10 +61,12 @@
     color: #333;
     margin-bottom: 10px;
 
+
 }
 
 .product-detail-container p {
     font-size: 1rem;
+    line-height: 1.5;
     color: #555;
     margin-bottom: 20px;
 }
@@ -79,7 +84,9 @@
 }
 
 .product-detail-container button:hover {
-    background-color: #e64a19;
+    background-color: white;
+    border-color: purple 1px solid;
+    color: purple;
 }
 
 /* Related Products Section */

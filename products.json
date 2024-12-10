@@ -42,22 +42,12 @@
     },
     {
         "id": 5,
-        "name": "Scroll of this n that",
+        "name": "Scroll of locate object",
         "category": "scrolls",
-        "price": 100,
-        "description": "scroll of magic happenings",
+        "price": 240,
+        "description": "Describe or name an object that is familiar to you. You sense the direction to the object’s location, as long as that object is within 1,000 feet of you. If the object is in motion, you know the direction of its movement. Useable by bard, druid, cleric, paladin, ranger and wizard. ",
         "mainImage": "/shop-images/basic-scroll.png",
-        "hoverImage": "/shop-images/froggy-necklace.png",
-        "dateAdded": "2024-9-25"
-    },
-    {
-        "id": 6,
-        "name": "item thingy",
-        "category": "item",
-        "price": 100,
-        "description": "it's an item thingy wingy",
-        "mainImage": "/shop-images/placeholder-hero.png",
-        "hoverImage": "/shop-images/froggy-necklace.png",
+        "hoverImage": "/shop-images/divination.png",
         "dateAdded": "2024-9-25"
     },
     {
@@ -65,9 +55,111 @@
         "name": "Gubben i Lådan",
         "category": "item",
         "price": 1000,
-        "description": "huvud, axlar knä och tå – gubben i lådan har fyra attacker och gör förvånansvärt lite skada. Är det värt det? Det är upp till dig",
-        "mainImage": "/shop-images/gold-froggy.png",
-        "hoverImage": "/shop-images/yellow-bat-jacket-product.png",
+        "description": "huvud, axlar knä och tå – gubben i lådan har fyra attacker men träffar förvånansvärt sällan. Är det värt det? Det är upp till dig. Full character sheet i samband med leverans.",
+        "mainImage": "/shop-images/gubben-i-ladan.png",
+        "hoverImage": "/shop-images/gubben-i-ladan-ute.png",
         "dateAdded": "2024-12-04"
+    },
+    {
+        "id": 8,
+        "name": "Snuggle Cloak",
+        "category": "apparel",
+        "price": 350,
+        "description": "En varm och gossig mantel som känns som att ha på sig en kram. Ibland så viskar den små komplimanger i ditt öra.",
+        "mainImage": "/shop-images/snuggle-coat.png",
+        "hoverImage": "/shop-images/snuggle-coat-2.png",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 9,
+        "name": "Mood Ring",
+        "category": "familiar",
+        "price": 40,
+        "description": "En mood ring! asså klassiskern. Fast denna har ingen aning om hur du mår. Istället läser den av sinnesstämningen hos din familiar.",
+        "mainImage": "/shop-images/familiar-ring.webp",
+        "hoverImage": "/shop-images/familiar-ring-2.webp",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 10,
+        "name": "Scroll of catapult",
+        "category": "scrolls",
+        "price": 120,
+        "description": "Choose one object weighing 1 to 5 pounds within range that isn’t being worn or carried. The object flies in a straight line up to 90 feet in a direction you choose before falling to the ground, stopping early if it impacts against a solid surface.",
+        "mainImage": "/shop-images/transmutation-scroll.png",
+        "hoverImage": "/shop-images/transmutation.png",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 11,
+        "name": "Flame Tongue [RARE]",
+        "category": "item",
+        "price": 4500,
+        "description": "You can use a bonus action to speak this magic sword's command word, causing flames to erupt from the blade. These flames shed bright light in a 40-foot radius and dim light for an additional 40 feet. While the sword is ablaze, it deals an extra 2d6 fire damage to any target it hits. The flames last until you use a bonus action to speak the command word again or until you drop or sheathe the sword. Attune to wepon of your choice (greatsword, longsword, rapier, scimitar or shortsword).",
+        "mainImage": "/shop-images/flame-tongue.webp",
+        "hoverImage": "/shop-images/flame-tongue-2.webp",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 12,
+        "name": "Flameweaver Gloves",
+        "category": "apparel",
+        "price": 150,
+        "description": "Thin, enchanted gloves that leave fiery trails when waved. Perfect for dramatic spellcasting.",
+        "mainImage": "/shop-images/flameweaver.png",
+        "hoverImage": "/shop-images/flameweaver-2.png",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 13,
+        "name": "Mantle of the Unyielding",
+        "category": "apparel",
+        "price": 250,
+        "description": "A reversible cape that subtly ripples as though caught in a breeze, no matter the conditions. Boosts Charisma checks in formal settings.",
+        "mainImage": "/shop-images/mantle-1.png",
+        "hoverImage": "/shop-images/mantle-2.png",
+        "extraImage1": "/shop-images/mantle-3.png",
+        "extraImage2": "/shop-images/mantle-4.png",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 14,
+        "name": "Gloves of Goblin Tossing",
+        "category": "apparel",
+        "price": 90,
+        "description": "Magical gloves that grant advantage when throwing small creatures. Great for bar fights.",
+        "mainImage": "/shop-images/goblin-tossers.png",
+        "hoverImage": "/shop-images/gobtoss.webp",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 15,
+        "name": "Playing cards",
+        "category": "item",
+        "price": 1,
+        "description": "Yea that's literally it. en jävla kortlek. ha så kul!! Om du är proficient med kortlek så kan du använda bonus för att spela.",
+        "mainImage": "/shop-images/playing-cards.jpg",
+        "hoverImage": "/shop-images/playing-cards-2.jpg",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 17,
+        "name": "Scroll of False Life",
+        "category": "scrolls",
+        "price": 150,
+        "description": "Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 temporary hit points for the duration.",
+        "mainImage": "/shop-images/conjuration-scroll.png",
+        "hoverImage": "/shop-images/necromancy.png",
+        "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 16,
+        "name": "Scroll of Arms of Hadar",
+        "category": "scrolls",
+        "price": 150,
+        "description": "You invoke the power of Hadar, the Dark Hunger. Tendrils of dark energy erupt from you and batter all creatures within 10 feet of you. Each creature in that area must make a Strength saving throw. On a failed save, a target takes 2d6 necrotic damage and can’t take reactions until its next turn. On a successful save, the creature takes half damage, but suffers no other effect.",
+        "mainImage": "/shop-images/necromancy-scroll.png",
+        "hoverImage": "/shop-images/conjuration.png",
+        "dateAdded": "2024-12-10"
     }
 ]
