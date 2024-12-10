@@ -1,5 +1,4 @@
-
-// Ensure navbar toggle functionality exists
+// Navbar toggle functionality
 function setupNavbarToggle() {
     const hamburgerIcon = document.getElementById('hamburgerIcon');
     const navbarMenu = document.getElementById('navbarMenu');
@@ -33,97 +32,14 @@ function addToCart(product) {
     saveCart(cart);
     updateCartCount();
     updateCartUI();
+    openCartDrawer(); // Automatically open the cart drawer
 }
 
-function updateCartCount() {
-    const cart = loadCart();
-    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
-    const cartCountElement = document.querySelector('.cart-count');
-    if (cartCountElement) {
-        cartCountElement.textContent = totalItems > 0 ? totalItems : '0';
+function openCartDrawer() {
+    const cartDrawer = document.querySelector('.cart-drawer');
+    if (cartDrawer) {
+        cartDrawer.classList.add('open');
     }
-}
-
-function updateItemQuantity(productId, newQuantity) {
-    const cart = loadCart();
-    console.log(`Cart before update:`, cart); // Debugging
-
-    const productIndex = cart.findIndex(item => item.id == productId); // Use == for type flexibility in data-id
-    if (productIndex !== -1) {
-        if (newQuantity > 0) {
-            cart[productIndex].quantity = newQuantity;
-            console.log(`Updated quantity for: ${productId}, new quantity: ${newQuantity}`); // Debugging
-        } else {
-            console.log(`Removing item: ${cart[productIndex]}`); // Debugging
-            cart.splice(productIndex, 1); // Remove item from array
-        }
-        saveCart(cart); // Save updated cart to storage
-        console.log(`Cart after update:`, cart); // Debugging
-    } else {
-        console.error(`Product with ID: ${productId} not found in cart.`); // Debugging
-    }
-
-    updateCartUI(); // Refresh UI after updating the cart
-}
-
-function updateCartUI() {
-    const cart = loadCart(); // Always fetch the latest cart
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const totalPriceElement = document.querySelector('.total-price');
-    const emptyMessageElement = document.querySelector('.empty-message');
-    console.log(`Updating cart UI with cart:`, cart); // Debugging
-
-    if (cartItemsContainer) {
-        if (cart.length > 0) {
-            cartItemsContainer.innerHTML = cart
-                .map(item => `
-                    <div class="cart-item">
-                        <span>${item.name}</span>
-                        <span>GP ${item.price.toFixed(2)}</span>
-                        <input type="number" value="${item.quantity}" min="0" data-id="${item.id}" class="quantity-input" />
-                        <button data-id="${item.id}" class="remove-item">Remove</button>
-                    </div>
-                `).join('');
-        } else {
-            cartItemsContainer.innerHTML = ''; // Clear the container if the cart is empty
-        }
-    }
-
-    if (emptyMessageElement) {
-        emptyMessageElement.style.display = cart.length === 0 ? 'block' : 'none'; // Show/hide empty cart message
-    }
-
-    if (totalPriceElement) {
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity || 0), 0);
-        totalPriceElement.textContent = `Total: GP ${total.toFixed(2)}`;
-    }
-
-    attachCartListeners(); // Ensure all event listeners are reattached
-}
-
-
-
-function attachCartListeners() {
-    // Attach listeners for quantity change
-    document.querySelectorAll('.quantity-input').forEach(input => {
-        input.addEventListener('change', (e) => {
-            const productId = e.target.getAttribute('data-id');
-            const newQuantity = parseInt(e.target.value, 10);
-            console.log(`Changing quantity for: ${productId}, new quantity: ${newQuantity}`); // Debugging
-            if (!isNaN(newQuantity)) {
-                updateItemQuantity(productId, newQuantity);
-            }
-        });
-    });
-
-    // Attach listeners for remove button
-    document.querySelectorAll('.remove-item').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const productId = e.target.getAttribute('data-id');
-            console.log(`Removing item with ID: ${productId}`); // Debugging
-            updateItemQuantity(productId, 0);
-        });
-    });
 }
 
 function setupCartDrawer() {
@@ -138,10 +54,128 @@ function setupCartDrawer() {
         closeCartButton.addEventListener('click', () => {
             cartDrawer.classList.remove('open');
         });
+
+        // Prevent cart drawer from closing when clicking inside it
+        cartDrawer.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click events inside the drawer from propagating
+        });
+
+        // Close the drawer when clicking outside of it
+        document.addEventListener('click', (e) => {
+            if (!cartDrawer.contains(e.target) && !cartButton.contains(e.target)) {
+                cartDrawer.classList.remove('open');
+            }
+        });
     }
 }
 
-// Dynamically include HTML components
+
+function updateCartUI() {
+    const cart = loadCart();
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const totalPriceElement = document.querySelector('.total-price');
+    const emptyMessageElement = document.querySelector('.empty-message');
+
+    if (cartItemsContainer) {
+        if (cart.length > 0) {
+            cartItemsContainer.innerHTML = cart
+                .map(item => `
+                    <div class="cart-item">
+                        <img src="${item.mainImage}" alt="${item.name}" class="cart-item-image">
+                        <div>
+                            <p><strong>${item.name}</strong></p>
+                            <p>GP ${item.price.toFixed(2)}</p>
+                            <div class="quantity-controls">
+                                <button class="decrease-quantity" data-id="${item.id}">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="increase-quantity" data-id="${item.id}">+</button>
+                            </div>
+                            <button data-id="${item.id}" class="remove-item">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+        } else {
+            cartItemsContainer.innerHTML = '<p class="empty-message">Your cart is empty!</p>';
+        }
+    }
+
+    if (emptyMessageElement) {
+        emptyMessageElement.style.display = cart.length === 0 ? 'block' : 'none';
+    }
+
+    if (totalPriceElement) {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity || 0), 0);
+        totalPriceElement.textContent = `Total: GP ${total.toFixed(2)}`;
+    }
+
+    attachCartListeners(); // Ensure all buttons work after UI updates
+}
+
+function attachCartListeners() {
+    // Increase quantity
+    document.querySelectorAll('.increase-quantity').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent layout jumping
+            const productId = e.target.getAttribute('data-id');
+            const cart = loadCart();
+            const product = cart.find(item => item.id == productId);
+            if (product) {
+                updateItemQuantity(productId, product.quantity + 1);
+            }
+        });
+    });
+
+    // Decrease quantity
+    document.querySelectorAll('.decrease-quantity').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent layout jumping
+            const productId = e.target.getAttribute('data-id');
+            const cart = loadCart();
+            const product = cart.find(item => item.id == productId);
+            if (product && product.quantity > 1) {
+                updateItemQuantity(productId, product.quantity - 1);
+            } else {
+                updateItemQuantity(productId, 0); // Remove item if quantity becomes 0
+            }
+        });
+    });
+
+    // Remove item
+    document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent layout jumping
+            const productId = e.target.getAttribute('data-id');
+            updateItemQuantity(productId, 0);
+        });
+    });
+}
+
+
+function updateCartCount() {
+    const cart = loadCart();
+    const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+    const cartCountElement = document.querySelector('.cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = cartCount;
+    }
+}
+
+function updateItemQuantity(productId, newQuantity) {
+    const cart = loadCart();
+    const productIndex = cart.findIndex(item => item.id == productId);
+    if (productIndex !== -1) {
+        if (newQuantity > 0) {
+            cart[productIndex].quantity = newQuantity;
+        } else {
+            cart.splice(productIndex, 1);
+        }
+        saveCart(cart);
+        updateCartCount();
+        updateCartUI();
+    }
+}
+
+// Include dynamic HTML components
 async function includeHTML(callback) {
     const elements = document.querySelectorAll('[data-include]');
     for (const element of elements) {
@@ -163,9 +197,9 @@ async function includeHTML(callback) {
 
 document.addEventListener('DOMContentLoaded', () => {
     includeHTML(() => {
-        setupCartDrawer();
-        setupNavbarToggle();
-        updateCartCount();
-        updateCartUI(); // Ensure cart is initialized after HTML inclusion
+        setupNavbarToggle(); // Ensure header functionality is included
+        setupCartDrawer();  // Ensure cart drawer setup works
+        updateCartCount();  // Update cart icon count
+        updateCartUI();     // Render cart items
     });
 });

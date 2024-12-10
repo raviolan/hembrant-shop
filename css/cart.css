@@ -1,21 +1,10 @@
-.cart {
-    position: sticky;
-    top: 15px;
-    right: 15px;
-    z-index: 1000;
-    margin-left: auto;
-    /* Ensures the cart is far-right */
-}
-
-.cart-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-}
-
+/* Cart Item Styles */
 .cart-item {
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
 }
 
 .cart-item-image {
@@ -28,21 +17,47 @@
     align-self: start;
 }
 
-
-.cart-button img {
-    width: 30px;
-    height: 30px;
+/* Quantity Controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.cart-count {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: black;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 12px;
+.quantity-controls button {
+    background-color: #ddd;
+    border: none;
+    width: 28px;
+    /* Slightly smaller than before to match your layout */
+    height: 28px;
+    /* Matching dimensions for consistency */
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-sizing: border-box;
+    /* Prevent size issues with padding */
+}
+
+.quantity-controls button:active {
+    transform: scale(0.95);
+    /* Subtle press effect */
+}
+
+.quantity-controls .quantity {
+    display: inline-block;
+    width: 28px;
+    /* Match button size */
+    height: 28px;
+    line-height: 28px;
+    /* Center the quantity text vertically */
+    text-align: center;
+    font-size: 14px;
+    /* Font size matching your original style */
+    font-weight: bold;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
 }
 
 /* Cart Drawer */
@@ -79,14 +94,6 @@
     padding: 10px;
 }
 
-.cart-drawer-body :active {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 10px;
-}
-
-
 .cart-drawer-footer {
     padding: 10px;
     border-top: 1px solid #ddd;
@@ -99,6 +106,25 @@
     margin-top: 20px;
 }
 
+.cart-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.cart-button img {
+    width: 30px;
+    height: 30px;
+}
+
+.cart-button:hover {
+    background: none;
+}
+
+
+
+/* Remove Button */
 .remove-item {
     font-family: quicksand, 'sans-serif';
     background-color: transparent;
@@ -106,12 +132,14 @@
     color: purple;
     border-radius: 5px;
     padding-inline: 10px;
+    margin-top: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
+/* Checkout Button */
 .checkout-button {
     background-color: purple;
     color: white;
@@ -121,6 +149,11 @@
     cursor: pointer;
 }
 
+.checkout-button:hover {
+    background-color: #6a1b9a;
+}
+
+/* Close Drawer Button */
 .close-drawer {
     background: none;
     border: none;
@@ -134,7 +167,6 @@
         position: relative;
         margin-left: 10px;
         top: -1px;
-
     }
 
     .cart img {
