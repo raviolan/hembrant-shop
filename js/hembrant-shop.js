@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const newInSection = document.querySelector(".new-in-grid");
 
             // Render product cards dynamically
-            const selectedProducts = products.slice(12, 17); // Display the selected products
+            const selectedProducts = products.slice(13, 18); // Display the selected products
             newInSection.innerHTML = selectedProducts
                 .map(product => `
                      <div class="product-card">

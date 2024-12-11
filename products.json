@@ -161,5 +161,16 @@
         "mainImage": "/shop-images/conjuration-scroll.png",
         "hoverImage": "/shop-images/conjuration.png",
         "dateAdded": "2024-12-10"
+    },
+    {
+        "id": 18,
+        "name": "Studded Leather Armor",
+        "category": "apparel",
+        "price": 45,
+        "description": "Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes. Light armor. AC: 12 + Dex modifier. Weight: 13",
+        "mainImage": "/shop-images/studded-armor.png",
+        "hoverImage": "/shop-images/studded-armor-front.png",
+        "extraImage1": "/shop-images/studded-armor-3.png",
+        "dateAdded": "2024-12-11"
     }
 ]
