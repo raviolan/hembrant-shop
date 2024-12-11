@@ -172,5 +172,15 @@
         "hoverImage": "/shop-images/studded-armor-front.png",
         "extraImage1": "/shop-images/studded-armor-3.png",
         "dateAdded": "2024-12-11"
+    },
+    {
+        "id": 19,
+        "name": "Novel: Arcane Desire",
+        "category": "item",
+        "price": 5,
+        "description": "In the city of Erelian, where magic is bound by strict laws, Aelindra, a rebellious sorceress, crosses paths with Caelen, a duty-bound paladin sworn to hunt her kind. As an ancient darkness threatens the realm, their reluctant alliance sparks a dangerous, forbidden passion. With every stolen touch and whispered secret, the line between chaos and order blurs—and the heat between them ignites a desire that could change their fates forever.",
+        "mainImage": "/shop-images/arcane-desire.webp",
+        "hoverImage": "/shop-images/arcane-desire-2.png",
+        "dateAdded": "2024-12-11"
     }
 ]
