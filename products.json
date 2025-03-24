@@ -187,10 +187,10 @@
         "id": 20,
         "name": "Eyewear of Alter Ego",
         "category": "apparel",
-        "price": 800,
+        "price": 450,
         "description": "By wearing these nonprescription glasses you will not be recognized. Individuals will have to make a DC 19 wisdom save to recognize you. You could live a completely different life for decades and no one will be the wiser. Even if someone does discover your true identity, no one will believe them as long as you wear these glasses. They might think that you are a librarian.",
-        "mainImage": "",
-        "hoverImage": "",
+        "mainImage": "/shop-images/eyewear.png",
+        "hoverImage": "/shop-images/eyewear-2.png",
         "dateAdded": "2025-03-24"
     },
     {
@@ -199,38 +199,168 @@
         "category": "item",
         "price": 315,
         "description": "This item only has the exact change for one purchase per day. It never rounds up.",
-        "mainImage": "",
-        "hoverImage": "",
+        "mainImage": "/shop-images/coin-purse.png",
+        "hoverImage": "/shop-images/coin-purse.png",
         "dateAdded": "2025-03-24"
     },
     {
         "id": 22,
         "name": "Ring of Encumbrance",
         "category": "item",
-        "price": 620,
+        "price": 120,
         "description": "This cursed item will slow your movement speed by 5 ft. After 10 rounds of wearing it, damage from falling is doubled. After 5 more rounds, your movement speed is halved. After five more rounds, you have disadvantage on athletics and acrobatics check. Five rounds later, disadvantage on stealth checks.",
-        "mainImage": "",
-        "hoverImage": "",
+        "mainImage": "/shop-images/anvil-ring.png",
+        "hoverImage": "/shop-images/anvil-ring.png",
         "dateAdded": "2025-03-24"
     },
     {
         "id": 23,
         "name": "Boots of Ass Kicking",
         "category": "apparel",
-        "price": 400,
+        "price": 300,
         "description": "These boots will allow you to kick more ass. Critical hit is now 1 less than usual, meaning a roll of 19 counts as Crit.",
-        "mainImage": "",
-        "hoverImage": "",
+        "mainImage": "/shop-images/boots-of-ass-kicking.png",
+        "hoverImage": "/shop-images/boots-of-ass-kicking.png",
         "dateAdded": "2025-03-24"
     },
     {
         "id": 24,
         "name": "Thunder Duck",
         "category": "item",
-        "price": 340,
-        "description": "This small rubber duck grants the user to change their attack to thunder damage.s",
-        "mainImage": "",
-        "hoverImage": "",
+        "price": 440,
+        "description": "This small rubber duck grants the user to change their attack to thunder damage.",
+        "mainImage": "/shop-images/thunder-duck.png",
+        "hoverImage": "/shop-images/thunder-duck-2.png",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 25,
+        "name": "Mug of Infinite Refill",
+        "category": "item",
+        "price": 260,
+        "description": "This ceramic mug refills with the last liquid poured into it once per short rest. This includes ale, healing potions, or suspicious potions brewed by a goblin. Do not use with poison unless you are absolutely sure.",
+        "mainImage": "/shop-images/infinite-mug.png",
+        "hoverImage": "/shop-images/infinite-mug-2.png",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 28,
+        "name": "Bag of Holding (But It's Moody)",
+        "category": "apparel",
+        "price": 60,
+        "description": "Functions exactly like a regular Bag of Holding—*when it's in the mood*. Roll a d6 every time you try to retrieve an item. On a 1-3, the bag refuses to cooperate and plays emotional harp music until soothed.",
+        "mainImage": "/shop-images/moody-bag.png",
+        "hoverImage": "/shop-images/moody-bag-2.png",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 31,
+        "name": "Tome of Useless Trivia",
+        "category": "item",
+        "price": 90,
+        "description": "This magically updated book contains facts that are 100% irrelevant to any situation you're in. Reading it grants no bonuses, but you feel *so* smug. Once per day, you may distract an NPC with a fascinating (yet pointless) tidbit.",
+        "mainImage": "/shop-images/useless-tome.webp",
+        "hoverImage": "/shop-images/useless-tome-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 32,
+        "name": "Cursed Toothbrush",
+        "category": "item",
+        "price": 65,
+        "description": "Grants +1 to Charisma checks for 24 hours after use—but every time you use it, your teeth become *just slightly too sharp*. Not enough to scare people, but enough that they comment on it. And then it’s weird. Now you look creepy.",
+        "mainImage": "/shop-images/cursed-toothbrush.webp",
+        "hoverImage": "/shop-images/cursed-toothbrush-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 33,
+        "name": "Robe of Suspicious Pockets",
+        "category": "apparel",
+        "price": 200,
+        "description": "This robe has 37 pockets. Only 6 are real. The others are either illusions, mimic mouths, or portals to unknown realms. Great for misdirection. Or losing your keys forever.",
+        "mainImage": "/shop-images/suspicious-robe.webp",
+        "hoverImage": "/shop-images/suspicious-robe-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 34,
+        "name": "Familiar-Sized Beanbag Chair",
+        "category": "familiar",
+        "price": 35,
+        "description": "A magically warming beanbag chair sized for familiars of all shapes. Grants +1 to Familiar Morale™. May also cause your bat to feel superior to everyone else in the room.",
+        "mainImage": "/shop-images/familiar-beanbag.webp",
+        "hoverImage": "/shop-images/familiar-beanbag-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 35,
+        "name": "Helmet of Unreadable Expressions",
+        "category": "apparel",
+        "price": 140,
+        "description": "This sleek helmet hides all facial expressions, making Insight checks against you have disadvantage. Downside: you also sound echoey and weird when you talk. Tradeoffs.",
+        "mainImage": "/shop-images/unreadable-helmet.jpg",
+        "hoverImage": "/shop-images/unreadable-helmet-2.jpg",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 36,
+        "name": "Locket of Selective Memory",
+        "category": "item",
+        "price": 270,
+        "description": "Once per long rest, open this locket and forget one thing of your choosing. Mechanically, you’re immune to one fear effect for 1 hour—but you won’t remember your ex’s name anymore. Tragic? Convenient? You decide.",
+        "mainImage": "/shop-images/memory-locket.webp",
+        "hoverImage": "/shop-images/memory-locket-2.png",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 37,
+        "name": "Earmuffs of Selective Hearing",
+        "category": "apparel",
+        "price": 95,
+        "description": "Wearing these lets you choose one person whose voice you temporarily cannot hear. Useful for tavern drama, loud bards, or ignoring your party’s rogue when they have ‘ideas’.",
+        "mainImage": "/shop-images/selective-hearing.webp",
+        "hoverImage": "/shop-images/selective-hearing-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 38,
+        "name": "Mystical Shower Cap",
+        "category": "apparel",
+        "price": 45,
+        "description": "Prevents all hair-related magic from affecting you. Curses, glamours, tangles—no effect. Does not protect from actual showers. Surprisingly fashionable.",
+        "mainImage": "/shop-images/shower-cap.webp",
+        "hoverImage": "/shop-images/shower-cap-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 39,
+        "name": "Tiny Horn of Mild Alarm",
+        "category": "item",
+        "price": 55,
+        "description": "Blow this horn to emit a moderately alarming 'eep!' sound. All allies within 10 ft. are alerted to danger, but enemies must roll a Wisdom save (DC 11) or just be… confused?",
+        "mainImage": "/shop-images/mild-horn.webp",
+        "hoverImage": "/shop-images/mild-horn-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 40,
+        "name": "Potion of Confident Lies",
+        "category": "item",
+        "price": 75,
+        "description": "For 1 hour after drinking, the drinker believe every lie you tell is 100% true. Gain advantage on Deception checks. Side effects may include mild delusion.",
+        "mainImage": "/shop-images/confident-lies.webp",
+        "hoverImage": "/shop-images/confident-lies-2.webp",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 41,
+        "name": "Potion of Sparkle Burps",
+        "category": "item",
+        "price": 15,
+        "description": "No magical benefit. Just causes the drinker to burp gentle glitter clouds for the next 1d4 hours. Absolutely delightful. Might annoy wizards.",
+        "mainImage": "/shop-images/sparkle-potion.png",
+        "hoverImage": "/shop-images/sparkle-potion-2.png",
         "dateAdded": "2025-03-24"
     }
 ]
