@@ -213,7 +213,6 @@
         "hoverImage": "",
         "dateAdded": "2025-03-24"
     },
-    ,
     {
         "id": 23,
         "name": "Boots of Ass Kicking",
@@ -229,7 +228,7 @@
         "name": "Thunder Duck",
         "category": "item",
         "price": 340,
-        "description": "This small rubber duck grants the user to change their attack to thunder damage.",
+        "description": "This small rubber duck grants the user to change their attack to thunder damage.s",
         "mainImage": "",
         "hoverImage": "",
         "dateAdded": "2025-03-24"
