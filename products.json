@@ -182,5 +182,56 @@
         "mainImage": "/shop-images/arcane-desire.webp",
         "hoverImage": "/shop-images/arcane-desire-2.png",
         "dateAdded": "2024-12-11"
+    },
+    {
+        "id": 20,
+        "name": "Eyewear of Alter Ego",
+        "category": "apparel",
+        "price": 800,
+        "description": "By wearing these nonprescription glasses you will not be recognized. Individuals will have to make a DC 19 wisdom save to recognize you. You could live a completely different life for decades and no one will be the wiser. Even if someone does discover your true identity, no one will believe them as long as you wear these glasses. They might think that you are a librarian.",
+        "mainImage": "",
+        "hoverImage": "",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 21,
+        "name": "Coin Purse of Exact Change",
+        "category": "item",
+        "price": 315,
+        "description": "This item only has the exact change for one purchase per day. It never rounds up.",
+        "mainImage": "",
+        "hoverImage": "",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 22,
+        "name": "Ring of Encumbrance",
+        "category": "item",
+        "price": 620,
+        "description": "This cursed item will slow your movement speed by 5 ft. After 10 rounds of wearing it, damage from falling is doubled. After 5 more rounds, your movement speed is halved. After five more rounds, you have disadvantage on athletics and acrobatics check. Five rounds later, disadvantage on stealth checks.",
+        "mainImage": "",
+        "hoverImage": "",
+        "dateAdded": "2025-03-24"
+    },
+    ,
+    {
+        "id": 23,
+        "name": "Boots of Ass Kicking",
+        "category": "apparel",
+        "price": 400,
+        "description": "These boots will allow you to kick more ass. Critical hit is now 1 less than usual, meaning a roll of 19 counts as Crit.",
+        "mainImage": "",
+        "hoverImage": "",
+        "dateAdded": "2025-03-24"
+    },
+    {
+        "id": 24,
+        "name": "Thunder Duck",
+        "category": "item",
+        "price": 340,
+        "description": "This small rubber duck grants the user to change their attack to thunder damage.",
+        "mainImage": "",
+        "hoverImage": "",
+        "dateAdded": "2025-03-24"
     }
 ]
