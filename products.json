@@ -263,16 +263,16 @@
         "hoverImage": "/shop-images/useless-tome-2.webp",
         "dateAdded": "2025-03-24"
     },
-    {
-        "id": 32,
-        "name": "Cursed Toothbrush",
-        "category": "item",
-        "price": 65,
-        "description": "Grants +1 to Charisma checks for 24 hours after use—but every time you use it, your teeth become *just slightly too sharp*. Not enough to scare people, but enough that they comment on it. And then it’s weird. Now you look creepy.",
-        "mainImage": "/shop-images/cursed-toothbrush.webp",
-        "hoverImage": "/shop-images/cursed-toothbrush-2.webp",
-        "dateAdded": "2025-03-24"
-    },
+    //{
+    //"id": 32,
+    //"name": "Cursed Toothbrush",
+    //"category": "item",
+    //"price": 65,
+    //"description": "Grants +1 to Charisma checks for 24 hours after use—but every time you use it, your teeth become *just slightly too sharp*. Not enough to scare people, but enough that they comment on it. And then it’s weird. Now you look creepy.",
+    //"mainImage": "/shop-images/cursed-toothbrush.webp",
+    //"hoverImage": "/shop-images/cursed-toothbrush-2.webp",
+    //"dateAdded": "2025-03-24"
+    //},
     {
         "id": 33,
         "name": "Robe of Suspicious Pockets",
