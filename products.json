@@ -213,16 +213,16 @@
         "hoverImage": "/shop-images/anvil-ring.png",
         "dateAdded": "2025-03-24"
     },
-    {
-        "id": 23,
-        "name": "Boots of Ass Kicking",
-        "category": "apparel",
-        "price": 300,
-        "description": "These boots will allow you to kick more ass. Critical hit is now 1 less than usual, meaning a roll of 19 counts as Crit.",
-        "mainImage": "/shop-images/boots-of-ass-kicking.png",
-        "hoverImage": "/shop-images/boots-of-ass-kicking.png",
-        "dateAdded": "2025-03-24"
-    },
+    // {
+    //"id": 23,
+    //"name": "Boots of Ass Kicking",
+    // "category": "apparel",
+    //"price": 300,
+    //"description": "These boots will allow you to kick more ass. Critical hit is now 1 less than usual, meaning a roll of 19 counts as Crit.",
+    //"mainImage": "/shop-images/boots-of-ass-kicking.png",
+    //"hoverImage": "/shop-images/boots-of-ass-kicking.png",
+    //"dateAdded": "2025-03-24"
+    //},
     {
         "id": 24,
         "name": "Thunder Duck",
@@ -233,16 +233,16 @@
         "hoverImage": "/shop-images/thunder-duck-2.png",
         "dateAdded": "2025-03-24"
     },
-    {
-        "id": 25,
-        "name": "Mug of Infinite Refill",
-        "category": "item",
-        "price": 260,
-        "description": "This ceramic mug refills with the last liquid poured into it once per short rest. This includes ale, healing potions, or suspicious potions brewed by a goblin. Do not use with poison unless you are absolutely sure.",
-        "mainImage": "/shop-images/infinite-mug.png",
-        "hoverImage": "/shop-images/infinite-mug-2.png",
-        "dateAdded": "2025-03-24"
-    },
+    //{
+    //"id": 25,
+    // "name": "Mug of Infinite Refill",
+    //"category": "item",
+    //"price": 260,
+    //"description": "This ceramic mug refills with the last liquid poured into it once per short rest. This includes ale, healing potions, or suspicious potions brewed by a goblin. Do not use with poison unless you are absolutely sure.",
+    //"mainImage": "/shop-images/infinite-mug.png",
+    //"hoverImage": "/shop-images/infinite-mug-2.png",
+    //"dateAdded": "2025-03-24"
+    //},
     {
         "id": 28,
         "name": "Bag of Holding (But It's Moody)",
