@@ -33,6 +33,15 @@ function renderProductDetails(product, inventoryRec = null) {
     const finite = Number.isFinite(rec.stock);
     const oos = rec.outOfStock || (finite && rec.stock === 0);
     const lowStock = finite && rec.stock <= 10 && rec.stock > 0;
+    
+    // Debug logging
+    console.log(`Product ${product.id}:`, {
+        hasInventoryRec: !!inventoryRec,
+        rec: rec,
+        finite: finite,
+        oos: oos,
+        lowStock: lowStock
+    });
 
     // Collect all images: main, hover, and extra images dynamically
     const galleryImages = [product.mainImage, product.hoverImage]
@@ -60,6 +69,16 @@ function renderProductDetails(product, inventoryRec = null) {
     // Show stock count for items with less than 3 in stock (but not out of stock)
     const showStockCount = finite && rec.stock < 3 && rec.stock > 0;
     const stockCountText = showStockCount ? `Only ${rec.stock} in stock` : '';
+    
+    // Debug the stock count logic
+    console.log(`Product ${product.id} stock count:`, {
+        finite: finite,
+        stock: rec.stock,
+        lessThan3: rec.stock < 3,
+        greaterThan0: rec.stock > 0,
+        showStockCount: showStockCount,
+        stockCountText: stockCountText
+    });
 
     productDetails.innerHTML = `
         <div class="product-image-gallery">
