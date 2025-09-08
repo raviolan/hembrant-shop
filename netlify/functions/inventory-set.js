@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   }
 
   const token = event.headers['x-admin-token'];
-  const expected = process.env.ADMIN_TOKEN || process.env.very_secret_token_0215;
+  const expected = process.env.ADMIN_TOKEN;
   if (!expected || token !== expected) {
     return { statusCode: 401, headers: HEADERS, body: JSON.stringify({ error: 'unauthorized' }) };
   }
