@@ -1,9 +1,18 @@
 // POST /api/purchase - Process purchase and decrement inventory
 // Body: { items: [{ id: string, qty: number }...] }
 // Returns 200 on success, 409 if insufficient stock
-const { getInventoryStore, HEADERS } = require('./_blob.js');
+const { getInventoryStore } = require('./_blob.js');
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
+  const HEADERS = {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-store',
+  };
+
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'method not allowed' }) };
+  }
+
   try {
     const { items } = JSON.parse(event.body);
     

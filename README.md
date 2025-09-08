@@ -249,6 +249,18 @@ npm run build
 - Chrome 63+, Firefox 55+, Safari 11+
 - Mobile responsive design
 
+## API Routes
+
+How the API routes map:
+
+- `/api/inventory` → `netlify/functions/inventory-get.js`
+- `/api/inventory/set` → `netlify/functions/inventory-set.js`  
+- `/api/purchase` → `netlify/functions/purchase.js`
+
+Env var required: `ADMIN_TOKEN` (set in Netlify UI or via CLI).
+
+Mention redeploy after env var changes.
+
 ---
 
 Built with vanilla HTML/CSS/JavaScript and Netlify Functions for reliable, fast performance.

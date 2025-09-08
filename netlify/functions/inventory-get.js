@@ -1,9 +1,13 @@
 // GET /api/inventory - Fetch current inventory state
 // Optional query: ?ids=id1,id2 to get specific products only
-const { getInventoryStore, HEADERS } = require('./_blob.js');
+const { getInventoryStore } = require('./_blob.js');
 
-exports.handler = async (event, context) => {
-  const request = { url: `${event.headers.origin || 'https://example.com'}${event.path}${event.multiValueQueryStringParameters ? '?' + new URLSearchParams(event.multiValueQueryStringParameters).toString() : ''}` };
+exports.handler = async (event) => {
+  const HEADERS = {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-store',
+  };
+
   try {
     const store = await getInventoryStore();
     const raw = await store.get('inventory.json');

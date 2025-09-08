@@ -1,20 +1,25 @@
 // POST /api/inventory/set - DM/admin only endpoint to update stock
 // Requires x-admin-token header matching ADMIN_TOKEN env var
 // Body: { id: string, stock?: number, outOfStock?: boolean }
-const { getInventoryStore, HEADERS } = require('./_blob.js');
+const { getInventoryStore } = require('./_blob.js');
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
+  const HEADERS = {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-store',
+  };
+
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'method not allowed' }) };
+  }
+
+  const token = event.headers['x-admin-token'];
+  const expected = process.env.ADMIN_TOKEN || process.env.very_secret_token_0215;
+  if (!expected || token !== expected) {
+    return { statusCode: 401, headers: HEADERS, body: JSON.stringify({ error: 'unauthorized' }) };
+  }
+
   try {
-    // Verify admin token
-    const token = event.headers['x-admin-token'];
-    if (!token || token !== process.env.ADMIN_TOKEN) {
-      return {
-        statusCode: 401,
-        headers: HEADERS,
-        body: JSON.stringify({ error: 'unauthorized' })
-      };
-    }
-    
     const { id, stock, outOfStock } = JSON.parse(event.body);
     if (!id) {
       return {

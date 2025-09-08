@@ -1,2 +1,4 @@
-/api/*   /.netlify/functions/:splat   200
-/* /hembrant-shop.html 200
+/api/inventory        /.netlify/functions/inventory-get   200
+/api/inventory/set    /.netlify/functions/inventory-set   200
+/api/purchase         /.netlify/functions/purchase        200
+/*                    /hembrant-shop.html                 200
