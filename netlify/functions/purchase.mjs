@@ -1,6 +1,6 @@
-const { HEADERS, coerceStock, loadMap, saveMap } = require('./_util');
+import { HEADERS, coerceStock, loadMap, saveMap } from './_util.mjs';
 
-exports.handler = async (event) => {
+export default async function handler(event) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'method not allowed' }) };
   }
@@ -36,7 +36,6 @@ exports.handler = async (event) => {
     }
   }
 
-
   await saveMap(ctx, map);
   const changed = Object.fromEntries(items.map(({ id }) => [id, map[id] || { stock: null, outOfStock: false }]));
   return {
@@ -44,4 +43,4 @@ exports.handler = async (event) => {
     headers: { ...HEADERS, 'X-Inventory-Storage': ctx.kind },
     body: JSON.stringify({ ok: true, inventory: changed }),
   };
-};
+}
