@@ -20,7 +20,10 @@ exports.handler = async (event) => {
   }
 
   try {
+    console.log('inventory-set: Starting request, body:', event.body);
     const { id, stock, outOfStock } = JSON.parse(event.body);
+    console.log('inventory-set: Parsed request - id:', id, 'stock:', stock, 'outOfStock:', outOfStock);
+    
     if (!id) {
       return {
         statusCode: 400,
@@ -29,9 +32,13 @@ exports.handler = async (event) => {
       };
     }
 
+    console.log('inventory-set: Getting store...');
     const store = await getInventoryStore();
+    console.log('inventory-set: Got store, getting data...');
     const raw = await store.get('inventory.json');
+    console.log('inventory-set: Got raw data:', raw ? 'data present' : 'no data');
     const map = raw ? JSON.parse(raw) : {};
+    console.log('inventory-set: Current inventory has', Object.keys(map).length, 'items');
     
     // Get current record or create default
     const current = map[id] ?? { stock: Infinity, outOfStock: false };

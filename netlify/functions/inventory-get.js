@@ -9,9 +9,13 @@ exports.handler = async (event) => {
   };
 
   try {
+    console.log('inventory-get: Starting request');
     const store = await getInventoryStore();
+    console.log('inventory-get: Got store');
     const raw = await store.get('inventory.json');
+    console.log('inventory-get: Got raw data:', raw ? 'data present' : 'no data');
     const fullMap = raw ? JSON.parse(raw) : {};
+    console.log('inventory-get: Parsed map with', Object.keys(fullMap).length, 'items');
     
     // Check if specific IDs requested  
     const idsParam = event.queryStringParameters?.ids;
