@@ -21,8 +21,9 @@ exports.handler = async (event) => {
 
   try {
     console.log('inventory-set: Starting request, body:', event.body);
-    const { id, stock, outOfStock } = JSON.parse(event.body);
-    console.log('inventory-set: Parsed request - id:', id, 'stock:', stock, 'outOfStock:', outOfStock);
+    const requestData = JSON.parse(event.body);
+    const { id, stock, outOfStock } = requestData;
+    console.log('inventory-set: Parsed request - id:', id, 'stock:', stock, 'typeof stock:', typeof stock, 'outOfStock:', outOfStock);
     
     if (!id) {
       return {
@@ -32,28 +33,33 @@ exports.handler = async (event) => {
       };
     }
 
-    console.log('inventory-set: Getting store...');
     const store = await getInventoryStore();
-    console.log('inventory-set: Got store, getting data...');
     const raw = await store.get('inventory.json');
-    console.log('inventory-set: Got raw data:', raw ? 'data present' : 'no data');
     const map = raw ? JSON.parse(raw) : {};
-    console.log('inventory-set: Current inventory has', Object.keys(map).length, 'items');
+    console.log('inventory-set: Current map before update:', map);
     
-    // Get current record or create default
-    const current = map[id] ?? { stock: Infinity, outOfStock: false };
+    // Handle stock value conversion
+    let finalStock;
+    if (stock === undefined || stock === null) {
+      finalStock = Infinity; // Default to unlimited
+    } else if (stock === '') {
+      finalStock = Infinity; // Empty string = unlimited
+    } else {
+      const numStock = Number(stock);
+      if (Number.isFinite(numStock) && numStock >= 0) {
+        finalStock = Math.floor(numStock);
+      } else {
+        finalStock = Infinity;
+      }
+    }
     
-    // Update only provided fields
-    const newStock = stock === undefined || stock === null || stock === '' ? 
-      current.stock : 
-      Number.isFinite(Number(stock)) ? Math.max(0, Math.floor(Number(stock))) : current.stock;
-      
+    // Create/update the record
     map[id] = {
-      stock: newStock,
-      outOfStock: typeof outOfStock === 'boolean' ? outOfStock : current.outOfStock
+      stock: finalStock,
+      outOfStock: !!outOfStock
     };
     
-    console.log('inventory-set: Updated record:', map[id]);
+    console.log('inventory-set: Final record for', id, ':', map[id]);
     
     // Save updated map
     await store.set('inventory.json', JSON.stringify(map));
