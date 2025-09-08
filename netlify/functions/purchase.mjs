@@ -1,18 +1,21 @@
 import { HEADERS, coerceStock, loadMap, saveMap } from './_util.mjs';
 
-export default async function handler(event) {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'method not allowed' }) };
+export default async function handler(request, context) {
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'method not allowed' }), { status: 405, headers: HEADERS });
   }
 
-  let body; try { body = JSON.parse(event.body || '{}'); } catch { body = {}; }
+  let body = {};
+  try { body = await request.json(); } catch { }
   const items = Array.isArray(body.items) ? body.items : [];
-  if (!items.length) return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'no items' }) };
+  if (!items.length) {
+    return new Response(JSON.stringify({ error: 'no items' }), { status: 400, headers: HEADERS });
+  }
 
   const ctx = await loadMap();
   const map = ctx.map;
 
-  // Validate
+  // validate
   const failures = [];
   for (const { id, qty } of items) {
     const rec = map[id] || { stock: null, outOfStock: false };
@@ -22,10 +25,10 @@ export default async function handler(event) {
     else if (finite && n < qty) failures.push({ id, reason: 'insufficient', stock: n });
   }
   if (failures.length) {
-    return { statusCode: 409, headers: HEADERS, body: JSON.stringify({ ok: false, failures }) };
+    return new Response(JSON.stringify({ ok: false, failures }), { status: 409, headers: HEADERS });
   }
 
-  // Decrement
+  // decrement
   for (const { id, qty } of items) {
     const rec = map[id] || { stock: null, outOfStock: false };
     const n = coerceStock(rec.stock);
@@ -38,9 +41,8 @@ export default async function handler(event) {
 
   await saveMap(ctx, map);
   const changed = Object.fromEntries(items.map(({ id }) => [id, map[id] || { stock: null, outOfStock: false }]));
-  return {
-    statusCode: 200,
-    headers: { ...HEADERS, 'X-Inventory-Storage': ctx.kind },
-    body: JSON.stringify({ ok: true, inventory: changed }),
-  };
+  return new Response(
+    JSON.stringify({ ok: true, inventory: changed }),
+    { status: 200, headers: { ...HEADERS, 'X-Inventory-Storage': ctx.kind } }
+  );
 }
