@@ -30,14 +30,17 @@ function renderProductDetails(product, inventoryRec = null) {
     
     // Check stock state
     const rec = inventoryRec || {};
-    const finite = Number.isFinite(rec.stock);
-    const oos = rec.outOfStock || (finite && rec.stock === 0);
-    const lowStock = finite && rec.stock <= 10 && rec.stock > 0;
+    // Handle null/undefined stock values - treat as infinite
+    const stockValue = rec.stock === null || rec.stock === undefined ? Infinity : rec.stock;
+    const finite = Number.isFinite(stockValue);
+    const oos = rec.outOfStock || (finite && stockValue === 0);
+    const lowStock = finite && stockValue <= 10 && stockValue > 0;
     
     // Debug logging
     console.log(`Product ${product.id}:`, {
         hasInventoryRec: !!inventoryRec,
         rec: rec,
+        stockValue: stockValue,
         finite: finite,
         oos: oos,
         lowStock: lowStock
@@ -67,15 +70,16 @@ function renderProductDetails(product, inventoryRec = null) {
     const buttonClass = oos ? 'disabled' : '';
     
     // Show stock count for items with less than 3 in stock (but not out of stock)
-    const showStockCount = finite && rec.stock < 3 && rec.stock > 0;
-    const stockCountText = showStockCount ? `Only ${rec.stock} in stock` : '';
+    const showStockCount = finite && stockValue < 3 && stockValue > 0;
+    const stockCountText = showStockCount ? `Only ${stockValue} in stock` : '';
     
     // Debug the stock count logic
     console.log(`Product ${product.id} stock count:`, {
         finite: finite,
-        stock: rec.stock,
-        lessThan3: rec.stock < 3,
-        greaterThan0: rec.stock > 0,
+        stockValue: stockValue,
+        originalStock: rec.stock,
+        lessThan3: stockValue < 3,
+        greaterThan0: stockValue > 0,
         showStockCount: showStockCount,
         stockCountText: stockCountText
     });

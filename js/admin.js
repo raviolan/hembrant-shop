@@ -207,14 +207,21 @@ async function saveProduct(productId) {
     const statusSpan = row.querySelector('.save-status');
     
     const stockValue = stockInput.value.trim();
-    const stock = stockValue === '' ? Infinity : parseInt(stockValue, 10);
     const outOfStock = oosCheckbox.checked;
     
-    if (stockValue !== '' && (isNaN(stock) || stock < 0)) {
-        statusSpan.textContent = '❌ Invalid stock number';
-        statusSpan.className = 'save-status admin-error';
-        return;
+    let stock;
+    if (stockValue === '') {
+        stock = undefined; // Will keep current or default to Infinity
+    } else {
+        stock = parseInt(stockValue, 10);
+        if (isNaN(stock) || stock < 0) {
+            statusSpan.textContent = '❌ Invalid stock number';
+            statusSpan.className = 'save-status admin-error';
+            return;
+        }
     }
+    
+    console.log('Saving product:', productId, 'stock:', stock, 'outOfStock:', outOfStock);
     
     try {
         const response = await fetch('/api/inventory/set', {
@@ -226,7 +233,7 @@ async function saveProduct(productId) {
             cache: 'no-store',
             body: JSON.stringify({
                 id: productId,
-                stock: Number.isFinite(stock) ? stock : undefined,
+                stock: stock,
                 outOfStock: outOfStock
             })
         });

@@ -44,10 +44,16 @@ exports.handler = async (event) => {
     const current = map[id] ?? { stock: Infinity, outOfStock: false };
     
     // Update only provided fields
+    const newStock = stock === undefined || stock === null || stock === '' ? 
+      current.stock : 
+      Number.isFinite(Number(stock)) ? Math.max(0, Math.floor(Number(stock))) : current.stock;
+      
     map[id] = {
-      stock: Number.isFinite(stock) ? Math.max(0, Math.floor(stock)) : current.stock,
+      stock: newStock,
       outOfStock: typeof outOfStock === 'boolean' ? outOfStock : current.outOfStock
     };
+    
+    console.log('inventory-set: Updated record:', map[id]);
     
     // Save updated map
     await store.set('inventory.json', JSON.stringify(map));
