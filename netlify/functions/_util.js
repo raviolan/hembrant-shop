@@ -1,47 +1,38 @@
-let blobs;
-try { blobs = require('@netlify/blobs'); } catch { blobs = null; }
+let getStore;
+try { ({ getStore } = require('@netlify/blobs')); } catch { getStore = null; }
 
-exports.HEADERS = {
+const HEADERS = {
   'Content-Type': 'application/json',
   'Cache-Control': 'no-store',
 };
 
-exports.coerceStock = (v) => {
+const coerceStock = (v) => {
   const n = Number(v);
   return Number.isFinite(n) ? Math.max(0, Math.floor(n)) : null; // null = infinite
 };
 
-exports.normalizeMap = (map) => {
+const normalizeMap = (map) => {
   const out = {};
   for (const [id, rec] of Object.entries(map || {})) {
-    const stock = exports.coerceStock(rec?.stock);
-    out[id] = { stock, outOfStock: !!rec?.outOfStock };
+    const n = coerceStock(rec?.stock);
+    out[id] = { stock: n, outOfStock: !!rec?.outOfStock };
   }
   return out;
 };
 
-exports.loadMap = async () => {
-  // Prefer Blobs if available
-  if (blobs?.getStore) {
-    try {
-      const store = blobs.getStore('inventory');
-      const raw = await store.get('inventory.json');
-      return { kind: 'blobs', store, map: raw ? JSON.parse(raw) : {} };
-    } catch (error) {
-      // Fall through to memory storage if Blobs fails
-    }
+const loadMap = async () => {
+  if (typeof getStore !== 'function') {
+    // Fail loudly so dev fixes bundling instead of silently using RAM.
+    throw new Error('@netlify/blobs not available; check netlify.toml and dependencies.');
   }
-  // Fallback to in-memory seeded from env
-  globalThis.__inv = globalThis.__inv || (() => {
-    try { return JSON.parse(process.env.INVENTORY_DATA || '{}'); } catch { return {}; }
-  })();
-  return { kind: 'memory', store: null, map: globalThis.__inv };
+  const store = getStore('inventory'); // creds injected automatically in Functions
+  const raw = await store.get('inventory.json');
+  const map = raw ? JSON.parse(raw) : {};
+  return { kind: 'blobs', store, map };
 };
 
-exports.saveMap = async (ctx, map) => {
-  if (ctx.kind === 'blobs') {
-    await ctx.store.set('inventory.json', JSON.stringify(map));
-  } else {
-    globalThis.__inv = map;
-  }
+const saveMap = async (ctx, map) => {
+  await ctx.store.set('inventory.json', JSON.stringify(map));
 };
+
+module.exports = { HEADERS, coerceStock, normalizeMap, loadMap, saveMap };
