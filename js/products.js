@@ -3,28 +3,36 @@ const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
 if (productId) {
-    fetch('/products.json')
-        .then(response => response.json())
-        .then(products => {
-            const product = products.find(p => p.id == productId);
-            if (product) {
-                renderProductDetails(product);
-                renderRelatedProducts(products, product.category, productId);
-            } else {
-                document.getElementById('product-details').innerHTML = '<p>Product not found!</p>';
-            }
-        })
-        .catch(err => {
-            console.error("Error loading products:", err);
-            document.getElementById('product-details').innerHTML = '<p>Error loading product details.</p>';
-        });
+    Promise.all([
+        fetch('/products.json').then(res => res.json()),
+        fetch(`/api/inventory?ids=${encodeURIComponent(productId)}`, { cache: 'no-store' })
+            .then(res => res.json())
+            .catch(() => ({})) // Fallback if inventory service unavailable
+    ]).then(([products, inventory]) => {
+        const product = products.find(p => p.id == productId);
+        if (product) {
+            renderProductDetails(product, inventory[productId]);
+            renderRelatedProducts(products, product.category, productId);
+        } else {
+            document.getElementById('product-details').innerHTML = '<p>Product not found!</p>';
+        }
+    }).catch(err => {
+        console.error("Error loading products:", err);
+        document.getElementById('product-details').innerHTML = '<p>Error loading product details.</p>';
+    });
 } else {
     document.getElementById('product-details').innerHTML = '<p>Invalid product ID.</p>';
 }
 
 // Function to render product details
-function renderProductDetails(product) {
+function renderProductDetails(product, inventoryRec = null) {
     const productDetails = document.getElementById('product-details');
+    
+    // Check stock state
+    const rec = inventoryRec || {};
+    const finite = Number.isFinite(rec.stock);
+    const oos = rec.outOfStock || (finite && rec.stock === 0);
+    const lowStock = finite && rec.stock <= 10 && rec.stock > 0;
 
     // Collect all images: main, hover, and extra images dynamically
     const galleryImages = [product.mainImage, product.hoverImage]
@@ -40,8 +48,14 @@ function renderProductDetails(product) {
             src="${image}" 
             class="product-thumbnail ${index === 0 ? 'active' : ''}" 
             data-image="${image}" 
-            onclick="updateMainImage('${image}', this)">
+            onclick="updateMainImage('${image}', this)"
+            loading="lazy">
     `).join('');
+
+    const stockLabel = oos ? 'Out of stock' : (lowStock ? `${rec.stock} left` : '');
+    const buttonText = oos ? 'Out of Stock' : 'Add to Cart';
+    const buttonDisabled = oos ? 'disabled' : '';
+    const buttonClass = oos ? 'disabled' : '';
 
     productDetails.innerHTML = `
         <div class="product-image-gallery">
@@ -58,7 +72,8 @@ function renderProductDetails(product) {
             <h1>${product.name}</h1>
             <p>${product.description}</p>
             <p><strong>Price:</strong> GP ${product.price.toFixed(2)}</p>
-            <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+            ${stockLabel ? `<p class="stock-info ${oos ? 'out-of-stock' : 'low-stock'}">${stockLabel}</p>` : ''}
+            <button onclick='addToCart(${JSON.stringify(product)})' ${buttonDisabled} class="${buttonClass}">${buttonText}</button>
         </div>
     `;
 

@@ -1,0 +1,72 @@
+/* Stock-related styling for badges and states */
+
+.stock-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-left: 8px;
+}
+
+.stock-badge.out-of-stock {
+    background-color: #dc3545;
+    color: white;
+}
+
+.stock-badge.low-stock {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.stock-info.out-of-stock {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.stock-info.low-stock {
+    color: #f57c00;
+    font-weight: bold;
+}
+
+.stock-warning {
+    color: #dc3545;
+    font-size: 12px;
+    font-style: italic;
+    margin: 4px 0;
+}
+
+/* Disabled button states */
+button.disabled,
+button:disabled {
+    background-color: #6c757d !important;
+    color: #fff !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+/* Cart item out of stock styling */
+.cart-item.out-of-stock {
+    opacity: 0.7;
+    border-left: 3px solid #dc3545;
+}
+
+/* Checkout stock errors */
+.stock-errors {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.stock-errors h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.stock-errors ul {
+    margin-bottom: 8px;
+    padding-left: 20px;
+}

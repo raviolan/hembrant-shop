@@ -48,8 +48,12 @@ function setupCartDrawer() {
     const closeCartButton = document.querySelector('.close-drawer');
 
     if (cartButton && cartDrawer && closeCartButton) {
-        cartButton.addEventListener('click', () => {
+        cartButton.addEventListener('click', async () => {
             cartDrawer.classList.toggle('open');
+            // Refresh inventory when opening cart
+            if (cartDrawer.classList.contains('open')) {
+                await refreshCartInventory();
+            }
         });
         closeCartButton.addEventListener('click', () => {
             cartDrawer.classList.remove('open');
@@ -75,27 +79,57 @@ function updateCartUI() {
     const cartItemsContainer = document.querySelector('.cart-items');
     const totalPriceElement = document.querySelector('.total-price');
     const emptyMessageElement = document.querySelector('.empty-message');
+    const checkoutButton = document.querySelector('.checkout-button');
 
     if (cartItemsContainer) {
         if (cart.length > 0) {
+            const hasOutOfStockItems = cart.some(item => item.outOfStock);
+            
             cartItemsContainer.innerHTML = cart
-                .map(item => `
-                    <div class="cart-item">
-                        <img src="${item.mainImage}" alt="${item.name}" class="cart-item-image">
-                        <div>
-                            <p><strong>${item.name}</strong></p>
-                            <p>GP ${item.price.toFixed(2)}</p>
-                            <div class="quantity-controls">
-                                <button class="decrease-quantity" data-id="${item.id}">-</button>
-                                <span class="quantity">${item.quantity}</span>
-                                <button class="increase-quantity" data-id="${item.id}">+</button>
+                .map(item => {
+                    const stockWarning = item.outOfStock 
+                        ? '<p class="stock-warning">Out of stock - remove to proceed</p>'
+                        : (Number.isFinite(item.currentStock) && item.currentStock < item.quantity)
+                        ? `<p class="stock-warning">Only ${item.currentStock} available</p>`
+                        : '';
+                    
+                    return `
+                        <div class="cart-item ${item.outOfStock ? 'out-of-stock' : ''}">
+                            <img src="${item.mainImage}" alt="${item.name}" class="cart-item-image">
+                            <div>
+                                <p><strong>${item.name}</strong></p>
+                                <p>GP ${item.price.toFixed(2)}</p>
+                                ${stockWarning}
+                                <div class="quantity-controls">
+                                    <button class="decrease-quantity" data-id="${item.id}">-</button>
+                                    <span class="quantity">${item.quantity}</span>
+                                    <button class="increase-quantity" data-id="${item.id}" 
+                                            ${item.outOfStock || (Number.isFinite(item.currentStock) && item.quantity >= item.currentStock) ? 'disabled' : ''}>+</button>
+                                </div>
+                                <button data-id="${item.id}" class="remove-item">Remove</button>
                             </div>
-                            <button data-id="${item.id}" class="remove-item">Remove</button>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
+            
+            // Disable checkout if any items are out of stock
+            if (checkoutButton) {
+                checkoutButton.disabled = hasOutOfStockItems;
+                if (hasOutOfStockItems) {
+                    checkoutButton.textContent = 'Remove out-of-stock items first';
+                    checkoutButton.classList.add('disabled');
+                } else {
+                    checkoutButton.textContent = 'Checkout';
+                    checkoutButton.classList.remove('disabled');
+                }
+            }
         } else {
             cartItemsContainer.innerHTML = '<p class="empty-message">Your cart is empty!</p>';
+            if (checkoutButton) {
+                checkoutButton.disabled = true;
+                checkoutButton.textContent = 'Checkout';
+                checkoutButton.classList.add('disabled');
+            }
         }
     }
 
@@ -172,6 +206,52 @@ function updateItemQuantity(productId, newQuantity) {
         saveCart(cart);
         updateCartCount();
         updateCartUI();
+    }
+}
+
+// Refresh cart inventory and clamp quantities to available stock
+async function refreshCartInventory() {
+    const cart = loadCart();
+    if (cart.length === 0) return;
+    
+    try {
+        const productIds = cart.map(item => item.id);
+        const inventory = await fetch(`/api/inventory?ids=${encodeURIComponent(productIds.join(','))}`, { cache: 'no-store' })
+            .then(res => res.json());
+        
+        let cartChanged = false;
+        
+        // Check each cart item against current stock
+        cart.forEach(item => {
+            const rec = inventory[item.id];
+            const finite = rec && Number.isFinite(rec.stock);
+            const oos = rec?.outOfStock || (finite && rec.stock === 0);
+            
+            if (oos) {
+                // Mark item as out of stock for UI
+                item.outOfStock = true;
+            } else if (finite && rec.stock < item.quantity) {
+                // Clamp quantity to available stock
+                item.quantity = rec.stock;
+                cartChanged = true;
+            } else {
+                // Item is available
+                delete item.outOfStock;
+            }
+            
+            // Store current stock for UI display
+            item.currentStock = finite ? rec.stock : Infinity;
+        });
+        
+        if (cartChanged) {
+            saveCart(cart);
+            updateCartCount();
+        }
+        
+        updateCartUI();
+        
+    } catch (error) {
+        console.error('Failed to refresh cart inventory:', error);
     }
 }
 
