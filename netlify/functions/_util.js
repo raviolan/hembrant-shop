@@ -1,4 +1,5 @@
-const { getStore } = require('@netlify/blobs');
+let blobs;
+try { blobs = require('@netlify/blobs'); } catch { blobs = null; }
 
 exports.HEADERS = {
   'Content-Type': 'application/json',
@@ -19,29 +20,24 @@ exports.normalizeMap = (map) => {
   return out;
 };
 
-// Fallback storage using environment variables (will work until Blobs is enabled)
-const fallbackStorage = {
-  async get(key) {
-    // Use environment variable for temporary storage
-    const envKey = `INVENTORY_${key.replace(/[^A-Z0-9]/gi, '_').toUpperCase()}`;
-    return process.env[envKey] || null;
-  },
-  async set(key, value) {
-    // For now, just log the attempt (production environment variables are read-only)
-    console.log(`Inventory update attempt: ${key} = ${value.substring(0, 100)}...`);
-    // Return success for now - actual persistence needs Blobs enabled
-    return true;
+exports.loadMap = async () => {
+  // Prefer Blobs if available
+  if (blobs?.getStore) {
+    const store = blobs.getStore('inventory');
+    const raw = await store.get('inventory.json');
+    return { kind: 'blobs', store, map: raw ? JSON.parse(raw) : {} };
   }
+  // Fallback to in-memory seeded from env
+  globalThis.__inv = globalThis.__inv || (() => {
+    try { return JSON.parse(process.env.INVENTORY_DATA || '{}'); } catch { return {}; }
+  })();
+  return { kind: 'memory', store: null, map: globalThis.__inv };
 };
 
-exports.loadStore = async () => {
-  try {
-    return getStore('inventory');
-  } catch (error) {
-    if (error.name === 'MissingBlobsEnvironmentError') {
-      console.log('Netlify Blobs not configured, using fallback storage');
-      return fallbackStorage;
-    }
-    throw error;
+exports.saveMap = async (ctx, map) => {
+  if (ctx.kind === 'blobs') {
+    await ctx.store.set('inventory.json', JSON.stringify(map));
+  } else {
+    globalThis.__inv = map;
   }
 };

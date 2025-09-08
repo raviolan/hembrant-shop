@@ -1,16 +1,12 @@
-const { HEADERS, normalizeMap, loadStore } = require('./_util');
+const { HEADERS, normalizeMap, loadMap, saveMap } = require('./_util');
 
 exports.handler = async () => {
-  const store = await loadStore();
-  const raw = await store.get('inventory.json');
-  let map = raw ? JSON.parse(raw) : {};
+  const ctx = await loadMap();
+  let map = ctx.map;
 
-  // One-time seed from env if store empty
-  if (!raw && process.env.INVENTORY_DATA) {
-    try {
-      map = JSON.parse(process.env.INVENTORY_DATA);
-      await store.set('inventory.json', JSON.stringify(map));
-    } catch (_) { /* ignore bad JSON */ }
+  // One-time seed from env if empty
+  if (Object.keys(map).length === 0 && process.env.INVENTORY_DATA) {
+    try { map = JSON.parse(process.env.INVENTORY_DATA); await saveMap(ctx, map); } catch {}
   }
 
   return { statusCode: 200, headers: HEADERS, body: JSON.stringify(normalizeMap(map)) };

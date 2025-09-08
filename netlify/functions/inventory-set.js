@@ -1,4 +1,4 @@
-const { HEADERS, coerceStock, loadStore } = require('./_util');
+const { HEADERS, coerceStock, loadMap, saveMap } = require('./_util');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -6,7 +6,7 @@ exports.handler = async (event) => {
   }
 
   const token = event.headers['x-admin-token'];
-  const expected = process.env.ADMIN_TOKEN;
+  const expected = process.env.ADMIN_TOKEN; // env only
   if (!expected || token !== expected) {
     return { statusCode: 401, headers: HEADERS, body: JSON.stringify({ error: 'unauthorized' }) };
   }
@@ -15,11 +15,10 @@ exports.handler = async (event) => {
   const id = String(body.id || '').trim();
   if (!id) return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'missing id' }) };
 
-  const store = await loadStore();
-  const raw = await store.get('inventory.json');
-  const map = raw ? JSON.parse(raw) : {};
-
+  const ctx = await loadMap();
+  const map = ctx.map;
   const current = map[id] || { stock: null, outOfStock: false };
+
   if (Object.prototype.hasOwnProperty.call(body, 'stock')) {
     const n = coerceStock(body.stock);
     current.stock = n;
@@ -30,6 +29,6 @@ exports.handler = async (event) => {
   }
 
   map[id] = current;
-  await store.set('inventory.json', JSON.stringify(map));
+  await saveMap(ctx, map);
   return { statusCode: 200, headers: HEADERS, body: JSON.stringify({ id, ...current }) };
 };
