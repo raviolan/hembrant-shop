@@ -23,9 +23,13 @@ exports.normalizeMap = (map) => {
 exports.loadMap = async () => {
   // Prefer Blobs if available
   if (blobs?.getStore) {
-    const store = blobs.getStore('inventory');
-    const raw = await store.get('inventory.json');
-    return { kind: 'blobs', store, map: raw ? JSON.parse(raw) : {} };
+    try {
+      const store = blobs.getStore('inventory');
+      const raw = await store.get('inventory.json');
+      return { kind: 'blobs', store, map: raw ? JSON.parse(raw) : {} };
+    } catch (error) {
+      // Fall through to memory storage if Blobs fails
+    }
   }
   // Fallback to in-memory seeded from env
   globalThis.__inv = globalThis.__inv || (() => {
