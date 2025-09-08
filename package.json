@@ -2,6 +2,10 @@
   "name": "hembrant-shop",
   "private": true,
   "type": "commonjs",
-  "engines": { "node": ">=18" },
-  "dependencies": { "@netlify/blobs": "^6.0.0" }
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^6.5.0"
+  }
 }
