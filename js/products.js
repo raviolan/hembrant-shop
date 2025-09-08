@@ -56,6 +56,10 @@ function renderProductDetails(product, inventoryRec = null) {
     const buttonText = oos ? 'Out of Stock' : 'Add to Cart';
     const buttonDisabled = oos ? 'disabled' : '';
     const buttonClass = oos ? 'disabled' : '';
+    
+    // Show stock count for items with less than 3 in stock (but not out of stock)
+    const showStockCount = finite && rec.stock < 3 && rec.stock > 0;
+    const stockCountText = showStockCount ? `Only ${rec.stock} in stock` : '';
 
     productDetails.innerHTML = `
         <div class="product-image-gallery">
@@ -74,6 +78,7 @@ function renderProductDetails(product, inventoryRec = null) {
             <p><strong>Price:</strong> GP ${product.price.toFixed(2)}</p>
             ${stockLabel ? `<p class="stock-info ${oos ? 'out-of-stock' : 'low-stock'}">${stockLabel}</p>` : ''}
             <button onclick='addToCart(${JSON.stringify(product)})' ${buttonDisabled} class="${buttonClass}">${buttonText}</button>
+            ${stockCountText ? `<p class="low-stock-notice">${stockCountText}</p>` : ''}
         </div>
     `;
 

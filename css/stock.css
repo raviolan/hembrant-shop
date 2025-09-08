@@ -51,6 +51,15 @@ button:disabled {
     border-left: 3px solid #dc3545;
 }
 
+/* Low stock notice on product pages */
+.low-stock-notice {
+    font-size: 14px;
+    color: #f57c00;
+    font-style: italic;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
 /* Checkout stock errors */
 .stock-errors {
     background-color: #f8d7da;
