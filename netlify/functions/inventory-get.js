@@ -11,7 +11,7 @@ exports.handler = async () => {
       map = JSON.parse(process.env.INVENTORY_DATA);
       await saveMap(ctx, map);
     } catch {
-      // ignore bad JSON
+      // ignore bad JSON in env
     }
   }
 

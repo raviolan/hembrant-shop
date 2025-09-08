@@ -5,14 +5,14 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'method not allowed' }) };
   }
 
-  // Auth: env-only (no hard-coded fallbacks; avoids secrets-scan issues)
+  // Auth: env-only (avoid hard-coded secrets)
   const token = event.headers['x-admin-token'];
   const expected = process.env.ADMIN_TOKEN;
   if (!expected || token !== expected) {
     return { statusCode: 401, headers: HEADERS, body: JSON.stringify({ error: 'unauthorized' }) };
   }
 
-  // Parse body
+  // Parse body safely
   let body;
   try { body = JSON.parse(event.body || '{}'); } catch { body = {}; }
 
@@ -21,7 +21,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'missing id' }) };
   }
 
-  // Load current map
+  // Load current map (Blobs or memory)
   const ctx = await loadMap();
   const map = ctx.map;
 
@@ -29,11 +29,10 @@ exports.handler = async (event) => {
   const current = map[id] || { stock: null, outOfStock: false };
 
   if (Object.prototype.hasOwnProperty.call(body, 'stock')) {
-    const n = coerceStock(body.stock);
-    current.stock = n;                          // number or null (null = infinite)
+    const n = coerceStock(body.stock);     // number or null (null = infinite)
+    current.stock = n;
     current.outOfStock = n === 0 ? true : !!current.outOfStock;
   }
-
   if (Object.prototype.hasOwnProperty.call(body, 'outOfStock')) {
     current.outOfStock = !!body.outOfStock;
   }
