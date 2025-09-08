@@ -1,17 +1,18 @@
 // POST /api/purchase - Process purchase and decrement inventory
 // Body: { items: [{ id: string, qty: number }...] }
 // Returns 200 on success, 409 if insufficient stock
-import { getInventoryStore, HEADERS } from './_blob.js';
+const { getInventoryStore, HEADERS } = require('./_blob.js');
 
-export default async (request) => {
+exports.handler = async (event, context) => {
   try {
-    const { items } = await request.json();
+    const { items } = JSON.parse(event.body);
     
     if (!Array.isArray(items) || items.length === 0) {
-      return new Response(
-        JSON.stringify({ error: 'no items' }), 
-        { headers: HEADERS, status: 400 }
-      );
+      return {
+        statusCode: 400,
+        headers: HEADERS,
+        body: JSON.stringify({ error: 'no items' })
+      };
     }
 
     const store = await getInventoryStore();
@@ -32,10 +33,11 @@ export default async (request) => {
     
     // If any validation failures, return them
     if (failures.length) {
-      return new Response(
-        JSON.stringify({ ok: false, failures }), 
-        { headers: HEADERS, status: 409 }
-      );
+      return {
+        statusCode: 409,
+        headers: HEADERS,
+        body: JSON.stringify({ ok: false, failures })
+      };
     }
 
     // All items valid - decrement stock
@@ -58,16 +60,18 @@ export default async (request) => {
       items.map(({ id }) => [id, map[id] ?? { stock: Infinity, outOfStock: false }])
     );
     
-    return new Response(
-      JSON.stringify({ ok: true, inventory: changedInventory }), 
-      { headers: HEADERS, status: 200 }
-    );
+    return {
+      statusCode: 200,
+      headers: HEADERS,
+      body: JSON.stringify({ ok: true, inventory: changedInventory })
+    };
     
   } catch (error) {
     console.error('Purchase error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Purchase failed' }), 
-      { headers: HEADERS, status: 500 }
-    );
+    return {
+      statusCode: 500,
+      headers: HEADERS,
+      body: JSON.stringify({ error: 'Purchase failed' })
+    };
   }
 };

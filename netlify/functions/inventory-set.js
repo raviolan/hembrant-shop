@@ -1,25 +1,27 @@
 // POST /api/inventory/set - DM/admin only endpoint to update stock
 // Requires x-admin-token header matching ADMIN_TOKEN env var
 // Body: { id: string, stock?: number, outOfStock?: boolean }
-import { getInventoryStore, HEADERS } from './_blob.js';
+const { getInventoryStore, HEADERS } = require('./_blob.js');
 
-export default async (request) => {
+exports.handler = async (event, context) => {
   try {
     // Verify admin token
-    const token = request.headers.get('x-admin-token');
+    const token = event.headers['x-admin-token'];
     if (!token || token !== process.env.ADMIN_TOKEN) {
-      return new Response(
-        JSON.stringify({ error: 'unauthorized' }), 
-        { headers: HEADERS, status: 401 }
-      );
+      return {
+        statusCode: 401,
+        headers: HEADERS,
+        body: JSON.stringify({ error: 'unauthorized' })
+      };
     }
     
-    const { id, stock, outOfStock } = await request.json();
+    const { id, stock, outOfStock } = JSON.parse(event.body);
     if (!id) {
-      return new Response(
-        JSON.stringify({ error: 'missing id' }), 
-        { headers: HEADERS, status: 400 }
-      );
+      return {
+        statusCode: 400,
+        headers: HEADERS,
+        body: JSON.stringify({ error: 'missing id' })
+      };
     }
 
     const store = await getInventoryStore();
@@ -38,13 +40,18 @@ export default async (request) => {
     // Save updated map
     await store.set('inventory.json', JSON.stringify(map));
     
-    return new Response(JSON.stringify(map[id]), { headers: HEADERS, status: 200 });
+    return {
+      statusCode: 200,
+      headers: HEADERS,
+      body: JSON.stringify(map[id])
+    };
     
   } catch (error) {
     console.error('Inventory set error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to update inventory' }), 
-      { headers: HEADERS, status: 500 }
-    );
+    return {
+      statusCode: 500,
+      headers: HEADERS,
+      body: JSON.stringify({ error: 'Failed to update inventory' })
+    };
   }
 };
