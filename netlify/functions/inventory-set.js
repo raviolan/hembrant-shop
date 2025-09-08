@@ -32,7 +32,7 @@ exports.handler = async (event) => {
 
   return {
     statusCode: 200,
-    headers: { ...HEADERS, 'X-Inventory-Storage': 'blobs' },
+    headers: { ...HEADERS, 'X-Inventory-Storage': ctx.kind },
     body: JSON.stringify({ id, ...current }),
   };
 };

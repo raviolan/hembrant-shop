@@ -36,7 +36,12 @@ exports.handler = async (event) => {
     }
   }
 
+
   await saveMap(ctx, map);
   const changed = Object.fromEntries(items.map(({ id }) => [id, map[id] || { stock: null, outOfStock: false }]));
-  return { statusCode: 200, headers: { ...HEADERS, 'X-Inventory-Storage': 'blobs' }, body: JSON.stringify({ ok: true, inventory: changed }) };
+  return {
+    statusCode: 200,
+    headers: { ...HEADERS, 'X-Inventory-Storage': ctx.kind },
+    body: JSON.stringify({ ok: true, inventory: changed }),
+  };
 };
